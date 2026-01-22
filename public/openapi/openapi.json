@@ -4817,7 +4817,10 @@
           {
             "$ref": "#/components/schemas/SpecificApplyPatchParam"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       },
       "ToolChoiceValueEnum": {
         "type": "string",
@@ -9662,7 +9665,10 @@
                 {
                   "$ref": "#/components/schemas/CustomToolChoice"
                 }
-              ]
+              ],
+              "discriminator": {
+                "propertyName": "type"
+              }
             },
             "type": "array"
           },
