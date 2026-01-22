@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["message"]
+        }
+      }
+    },
+    {
+      "oneOf": [
+        {
+          "$ref": "./AssistantMessageItemParam.json"
+        },
+        {
+          "$ref": "./DeveloperMessageItemParam.json"
+        },
+        {
+          "$ref": "./SystemMessageItemParam.json"
+        },
+        {
+          "$ref": "./UserMessageItemParam.json"
+        }
+      ],
+      "discriminator": {
+        "propertyName": "role"
+      },
+      "x-openai-class-name": "responses_common.api.params.input_item_param.MessageItemParam"
+    }
+  ]
+}

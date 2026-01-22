@@ -10,16 +10,7 @@
       "$ref": "./CompactionSummaryItemParam.json"
     },
     {
-      "$ref": "./UserMessageItemParam.json"
-    },
-    {
-      "$ref": "./SystemMessageItemParam.json"
-    },
-    {
-      "$ref": "./DeveloperMessageItemParam.json"
-    },
-    {
-      "$ref": "./AssistantMessageItemParam.json"
+      "$ref": "./MessageItemParam.json"
     },
     {
       "$ref": "./FunctionCallItemParam.json"

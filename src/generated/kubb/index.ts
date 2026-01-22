@@ -233,6 +233,7 @@ export { MCPToolFilterFieldSchema } from "./zod/MCPToolFilterFieldSchema.ts";
 export { MCPToolFilterParamSchema } from "./zod/MCPToolFilterParamSchema.ts";
 export { MCPToolParamSchema } from "./zod/MCPToolParamSchema.ts";
 export { MCPToolSchema } from "./zod/MCPToolSchema.ts";
+export { messageItemParamSchema } from "./zod/messageItemParamSchema.ts";
 export { messageRoleSchema } from "./zod/messageRoleSchema.ts";
 export { messageSchema } from "./zod/messageSchema.ts";
 export { messageStatusSchema } from "./zod/messageStatusSchema.ts";

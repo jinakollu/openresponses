@@ -5,14 +5,12 @@
 
 import { applyPatchToolCallItemParamSchema } from "./applyPatchToolCallItemParamSchema.ts";
 import { applyPatchToolCallOutputItemParamSchema } from "./applyPatchToolCallOutputItemParamSchema.ts";
-import { assistantMessageItemParamSchema } from "./assistantMessageItemParamSchema.ts";
 import { codeInterpreterCallItemParamSchema } from "./codeInterpreterCallItemParamSchema.ts";
 import { compactionSummaryItemParamSchema } from "./compactionSummaryItemParamSchema.ts";
 import { computerCallItemParamSchema } from "./computerCallItemParamSchema.ts";
 import { computerCallOutputItemParamSchema } from "./computerCallOutputItemParamSchema.ts";
 import { customToolCallItemParamSchema } from "./customToolCallItemParamSchema.ts";
 import { customToolCallOutputItemParamSchema } from "./customToolCallOutputItemParamSchema.ts";
-import { developerMessageItemParamSchema } from "./developerMessageItemParamSchema.ts";
 import { fileSearchCallItemParamSchema } from "./fileSearchCallItemParamSchema.ts";
 import { functionCallItemParamSchema } from "./functionCallItemParamSchema.ts";
 import { functionCallOutputItemParamSchema } from "./functionCallOutputItemParamSchema.ts";
@@ -24,9 +22,8 @@ import { localShellCallItemParamSchema } from "./localShellCallItemParamSchema.t
 import { localShellCallOutputItemParamSchema } from "./localShellCallOutputItemParamSchema.ts";
 import { MCPApprovalRequestItemParamSchema } from "./MCPApprovalRequestItemParamSchema.ts";
 import { MCPApprovalResponseItemParamSchema } from "./MCPApprovalResponseItemParamSchema.ts";
+import { messageItemParamSchema } from "./messageItemParamSchema.ts";
 import { reasoningItemParamSchema } from "./reasoningItemParamSchema.ts";
-import { systemMessageItemParamSchema } from "./systemMessageItemParamSchema.ts";
-import { userMessageItemParamSchema } from "./userMessageItemParamSchema.ts";
 import { webSearchCallItemParamSchema } from "./webSearchCallItemParamSchema.ts";
 import { z } from "zod";
 
@@ -34,10 +31,7 @@ export const itemParamSchema = z.union([
   z.lazy(() => itemReferenceParamSchema),
   z.lazy(() => reasoningItemParamSchema),
   z.lazy(() => compactionSummaryItemParamSchema),
-  z.lazy(() => userMessageItemParamSchema),
-  z.lazy(() => systemMessageItemParamSchema),
-  z.lazy(() => developerMessageItemParamSchema),
-  z.lazy(() => assistantMessageItemParamSchema),
+  z.lazy(() => messageItemParamSchema),
   z.lazy(() => functionCallItemParamSchema),
   z.lazy(() => functionCallOutputItemParamSchema),
   z.lazy(() => customToolCallItemParamSchema),

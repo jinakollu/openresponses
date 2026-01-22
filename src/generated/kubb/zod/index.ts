@@ -233,6 +233,7 @@ export { MCPToolFilterFieldSchema } from "./MCPToolFilterFieldSchema.ts";
 export { MCPToolFilterParamSchema } from "./MCPToolFilterParamSchema.ts";
 export { MCPToolParamSchema } from "./MCPToolParamSchema.ts";
 export { MCPToolSchema } from "./MCPToolSchema.ts";
+export { messageItemParamSchema } from "./messageItemParamSchema.ts";
 export { messageRoleSchema } from "./messageRoleSchema.ts";
 export { messageSchema } from "./messageSchema.ts";
 export { messageStatusSchema } from "./messageStatusSchema.ts";
