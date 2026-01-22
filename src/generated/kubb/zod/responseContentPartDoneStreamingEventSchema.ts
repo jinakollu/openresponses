@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { computerScreenshotContentSchema } from "./computerScreenshotContentSchema.ts";
 import { inputFileContentSchema } from "./inputFileContentSchema.ts";
 import { inputImageContentSchema } from "./inputImageContentSchema.ts";
 import { inputTextContentSchema } from "./inputTextContentSchema.ts";
@@ -44,6 +45,7 @@ export const responseContentPartDoneStreamingEventSchema = z
         z.lazy(() => reasoningTextContentSchema),
         z.lazy(() => refusalContentSchema),
         z.lazy(() => inputImageContentSchema),
+        z.lazy(() => computerScreenshotContentSchema),
         z.lazy(() => inputFileContentSchema),
       ])
       .describe("A content part that makes up an input or output item."),

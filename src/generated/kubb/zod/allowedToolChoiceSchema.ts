@@ -3,12 +3,36 @@
  * Do not edit manually.
  */
 
+import { applyPatchToolChoiceSchema } from "./applyPatchToolChoiceSchema.ts";
+import { codeInterpreterToolChoiceSchema } from "./codeInterpreterToolChoiceSchema.ts";
+import { computerToolChoiceSchema } from "./computerToolChoiceSchema.ts";
+import { customToolChoiceSchema } from "./customToolChoiceSchema.ts";
+import { fileSearchToolChoiceSchema } from "./fileSearchToolChoiceSchema.ts";
+import { functionShellToolChoiceSchema } from "./functionShellToolChoiceSchema.ts";
 import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
+import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
+import { localShellToolChoiceSchema } from "./localShellToolChoiceSchema.ts";
+import { MCPToolChoiceSchema } from "./MCPToolChoiceSchema.ts";
 import { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
+import { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
 import { z } from "zod";
 
 export const allowedToolChoiceSchema = z.object({
   type: z.enum(["allowed_tools"]).default("allowed_tools"),
-  tools: z.array(z.lazy(() => functionToolChoiceSchema)),
+  tools: z.array(
+    z.union([
+      z.lazy(() => codeInterpreterToolChoiceSchema),
+      z.lazy(() => functionToolChoiceSchema),
+      z.lazy(() => MCPToolChoiceSchema),
+      z.lazy(() => fileSearchToolChoiceSchema),
+      z.lazy(() => webSearchToolChoiceSchema),
+      z.lazy(() => imageGenToolChoiceSchema),
+      z.lazy(() => computerToolChoiceSchema),
+      z.lazy(() => localShellToolChoiceSchema),
+      z.lazy(() => functionShellToolChoiceSchema),
+      z.lazy(() => applyPatchToolChoiceSchema),
+      z.lazy(() => customToolChoiceSchema),
+    ]),
+  ),
   mode: z.lazy(() => toolChoiceValueEnumSchema),
 });

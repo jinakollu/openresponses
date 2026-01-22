@@ -3,12 +3,30 @@
  * Do not edit manually.
  */
 
+import { applyPatchToolSchema } from "./applyPatchToolSchema.ts";
+import { computerUsePreviewToolSchema } from "./computerUsePreviewToolSchema.ts";
+import { customToolSchema } from "./customToolSchema.ts";
+import { fileSearchToolSchema } from "./fileSearchToolSchema.ts";
+import { functionShellToolSchema } from "./functionShellToolSchema.ts";
 import { functionToolSchema } from "./functionToolSchema.ts";
+import { imageGenToolSchema } from "./imageGenToolSchema.ts";
+import { MCPToolSchema } from "./MCPToolSchema.ts";
+import { webSearchPreviewToolSchema } from "./webSearchPreviewToolSchema.ts";
 import { z } from "zod";
 
 /**
  * @description A tool that can be used to generate a response.
  */
 export const toolSchema = z
-  .lazy(() => functionToolSchema)
+  .union([
+    z.lazy(() => fileSearchToolSchema),
+    z.lazy(() => functionToolSchema),
+    z.lazy(() => webSearchPreviewToolSchema),
+    z.lazy(() => MCPToolSchema),
+    z.lazy(() => computerUsePreviewToolSchema),
+    z.lazy(() => imageGenToolSchema),
+    z.lazy(() => functionShellToolSchema),
+    z.lazy(() => customToolSchema),
+    z.lazy(() => applyPatchToolSchema),
+  ])
   .describe("A tool that can be used to generate a response.");

@@ -3,9 +3,33 @@
  * Do not edit manually.
  */
 
+import { specificApplyPatchParamSchema } from "./specificApplyPatchParamSchema.ts";
+import { specificCodeInterpreterParamSchema } from "./specificCodeInterpreterParamSchema.ts";
+import { specificComputerParamSchema } from "./specificComputerParamSchema.ts";
+import { specificComputerPreviewParamSchema } from "./specificComputerPreviewParamSchema.ts";
+import { specificCustomToolParamSchema } from "./specificCustomToolParamSchema.ts";
+import { specificFileSearchParamSchema } from "./specificFileSearchParamSchema.ts";
 import { specificFunctionParamSchema } from "./specificFunctionParamSchema.ts";
+import { specificFunctionShellParamSchema } from "./specificFunctionShellParamSchema.ts";
+import { specificImageGenParamSchema } from "./specificImageGenParamSchema.ts";
+import { specificLocalShellParamSchema } from "./specificLocalShellParamSchema.ts";
+import { specificMCPFunctionParamSchema } from "./specificMCPFunctionParamSchema.ts";
+import { specificWebSearchParamSchema } from "./specificWebSearchParamSchema.ts";
+import { specificWebSearchPreviewParamSchema } from "./specificWebSearchPreviewParamSchema.ts";
 import { z } from "zod";
 
-export const specificToolChoiceParamSchema = z.lazy(
-  () => specificFunctionParamSchema,
-);
+export const specificToolChoiceParamSchema = z.union([
+  z.lazy(() => specificFileSearchParamSchema),
+  z.lazy(() => specificWebSearchParamSchema),
+  z.lazy(() => specificWebSearchPreviewParamSchema),
+  z.lazy(() => specificImageGenParamSchema),
+  z.lazy(() => specificComputerParamSchema),
+  z.lazy(() => specificComputerPreviewParamSchema),
+  z.lazy(() => specificCodeInterpreterParamSchema),
+  z.lazy(() => specificFunctionParamSchema),
+  z.lazy(() => specificMCPFunctionParamSchema),
+  z.lazy(() => specificLocalShellParamSchema),
+  z.lazy(() => specificFunctionShellParamSchema),
+  z.lazy(() => specificCustomToolParamSchema),
+  z.lazy(() => specificApplyPatchParamSchema),
+]);

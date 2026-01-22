@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import { jsonSchemaResponseFormatParamSchema } from "./jsonSchemaResponseFormatParamSchema.ts";
+import { jsonSchemaResponseFormatSchema } from "./jsonSchemaResponseFormatSchema.ts";
 import { textResponseFormatSchema } from "./textResponseFormatSchema.ts";
 import { z } from "zod";
 
 export const textFormatParamSchema = z.union([
   z.lazy(() => textResponseFormatSchema),
-  z.lazy(() => jsonSchemaResponseFormatParamSchema),
+  z.lazy(() => jsonSchemaResponseFormatSchema),
 ]);

@@ -3,6 +3,8 @@
  * Do not edit manually.
  */
 
+import { containerFileCitationBodySchema } from "./containerFileCitationBodySchema.ts";
+import { fileCitationBodySchema } from "./fileCitationBodySchema.ts";
 import { urlCitationBodySchema } from "./urlCitationBodySchema.ts";
 import { z } from "zod";
 
@@ -10,5 +12,9 @@ import { z } from "zod";
  * @description An annotation that applies to a span of output text.
  */
 export const annotationSchema = z
-  .lazy(() => urlCitationBodySchema)
+  .union([
+    z.lazy(() => fileCitationBodySchema),
+    z.lazy(() => urlCitationBodySchema),
+    z.lazy(() => containerFileCitationBodySchema),
+  ])
   .describe("An annotation that applies to a span of output text.");

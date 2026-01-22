@@ -3,6 +3,8 @@
  * Do not edit manually.
  */
 
+import { containerFileCitationParamSchema } from "./containerFileCitationParamSchema.ts";
+import { fileCitationParamSchema } from "./fileCitationParamSchema.ts";
 import { urlCitationParamSchema } from "./urlCitationParamSchema.ts";
 import { z } from "zod";
 
@@ -14,7 +16,11 @@ export const outputTextContentParamSchema = z.object({
   text: z.string().max(10485760).describe("The text content."),
   annotations: z.optional(
     z
-      .array(z.lazy(() => urlCitationParamSchema))
+      .union([
+        z.array(z.lazy(() => fileCitationParamSchema)),
+        z.array(z.lazy(() => urlCitationParamSchema)),
+        z.array(z.lazy(() => containerFileCitationParamSchema)),
+      ])
       .describe("Citations associated with the text content."),
   ),
 });

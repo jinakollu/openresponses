@@ -5,4 +5,8 @@
 
 import { z } from "zod";
 
-export const emptyModelParamSchema = z.object({});
+export const computerCallOutputStatusSchema = z.enum([
+  "completed",
+  "incomplete",
+  "failed",
+]);

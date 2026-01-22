@@ -17,6 +17,12 @@ export const reasoningSchema = z
       z.lazy(() => reasoningSummaryEnumSchema).and(z.any()),
       z.null(),
     ]),
+    generate_summary: z.optional(
+      z.union([
+        z.lazy(() => reasoningSummaryEnumSchema).and(z.any()),
+        z.null(),
+      ]),
+    ),
   })
   .describe(
     "Reasoning configuration and metadata that were used for the response.",

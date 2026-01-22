@@ -3,7 +3,39 @@
  * Do not edit manually.
  */
 
+import { applyPatchToolParamSchema } from "./applyPatchToolParamSchema.ts";
+import { codeInterpreterToolParamSchema } from "./codeInterpreterToolParamSchema.ts";
+import { computerToolParamSchema } from "./computerToolParamSchema.ts";
+import { computerUsePreviewToolParamSchema } from "./computerUsePreviewToolParamSchema.ts";
+import { customToolParamSchema } from "./customToolParamSchema.ts";
+import { fileSearchToolParamSchema } from "./fileSearchToolParamSchema.ts";
+import { functionShellToolParamSchema } from "./functionShellToolParamSchema.ts";
 import { functionToolParamSchema } from "./functionToolParamSchema.ts";
+import { imageGenToolParamSchema } from "./imageGenToolParamSchema.ts";
+import { localShellToolParamSchema } from "./localShellToolParamSchema.ts";
+import { MCPToolParamSchema } from "./MCPToolParamSchema.ts";
+import { webSearchGADeprecatedToolParamSchema } from "./webSearchGADeprecatedToolParamSchema.ts";
+import { webSearchPreviewToolParam20250311ParamSchema } from "./webSearchPreviewToolParam20250311ParamSchema.ts";
+import { webSearchPreviewToolParamSchema } from "./webSearchPreviewToolParamSchema.ts";
+import { webSearchToolParam20250814ParamSchema } from "./webSearchToolParam20250814ParamSchema.ts";
+import { webSearchToolParamSchema } from "./webSearchToolParamSchema.ts";
 import { z } from "zod";
 
-export const responsesToolParamSchema = z.lazy(() => functionToolParamSchema);
+export const responsesToolParamSchema = z.union([
+  z.lazy(() => codeInterpreterToolParamSchema),
+  z.lazy(() => functionToolParamSchema),
+  z.lazy(() => customToolParamSchema),
+  z.lazy(() => webSearchToolParamSchema),
+  z.lazy(() => webSearchToolParam20250814ParamSchema),
+  z.lazy(() => webSearchGADeprecatedToolParamSchema),
+  z.lazy(() => webSearchPreviewToolParamSchema),
+  z.lazy(() => webSearchPreviewToolParam20250311ParamSchema),
+  z.lazy(() => imageGenToolParamSchema),
+  z.lazy(() => MCPToolParamSchema),
+  z.lazy(() => fileSearchToolParamSchema),
+  z.lazy(() => computerToolParamSchema),
+  z.lazy(() => computerUsePreviewToolParamSchema),
+  z.lazy(() => localShellToolParamSchema),
+  z.lazy(() => functionShellToolParamSchema),
+  z.lazy(() => applyPatchToolParamSchema),
+]);

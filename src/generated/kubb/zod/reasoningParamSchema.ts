@@ -15,6 +15,12 @@ export const reasoningParamSchema = z
     effort: z.optional(
       z.union([z.lazy(() => reasoningEffortEnumSchema), z.null()]),
     ),
+    generate_summary: z.optional(
+      z.union([
+        z.lazy(() => reasoningSummaryEnumSchema).and(z.any()),
+        z.null(),
+      ]),
+    ),
     summary: z.optional(
       z.union([
         z.lazy(() => reasoningSummaryEnumSchema).and(z.any()),

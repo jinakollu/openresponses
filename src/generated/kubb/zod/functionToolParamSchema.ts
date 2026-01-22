@@ -3,7 +3,6 @@
  * Do not edit manually.
  */
 
-import { emptyModelParamSchema } from "./emptyModelParamSchema.ts";
 import { z } from "zod";
 
 export const functionToolParamSchema = z.object({
@@ -13,9 +12,7 @@ export const functionToolParamSchema = z.object({
     .max(64)
     .regex(/^[a-zA-Z0-9_-]+$/),
   description: z.optional(z.union([z.string(), z.null()])),
-  parameters: z.optional(
-    z.union([z.lazy(() => emptyModelParamSchema), z.null()]),
-  ),
+  parameters: z.optional(z.union([z.object({}).catchall(z.any()), z.null()])),
   strict: z.optional(z.boolean()),
   type: z.enum(["function"]).default("function"),
 });

@@ -3,10 +3,29 @@
  * Do not edit manually.
  */
 
+import { applyPatchToolCallOutputSchema } from "./applyPatchToolCallOutputSchema.ts";
+import { applyPatchToolCallSchema } from "./applyPatchToolCallSchema.ts";
+import { codeInterpreterCallSchema } from "./codeInterpreterCallSchema.ts";
+import { compactionBodySchema } from "./compactionBodySchema.ts";
+import { computerCallOutputSchema } from "./computerCallOutputSchema.ts";
+import { computerCallSchema } from "./computerCallSchema.ts";
+import { customToolCallOutputSchema } from "./customToolCallOutputSchema.ts";
+import { customToolCallSchema } from "./customToolCallSchema.ts";
+import { fileSearchCallSchema } from "./fileSearchCallSchema.ts";
 import { functionCallOutputSchema } from "./functionCallOutputSchema.ts";
 import { functionCallSchema } from "./functionCallSchema.ts";
+import { functionShellCallOutputSchema } from "./functionShellCallOutputSchema.ts";
+import { functionShellCallSchema } from "./functionShellCallSchema.ts";
+import { imageGenCallSchema } from "./imageGenCallSchema.ts";
+import { localShellCallOutputSchema } from "./localShellCallOutputSchema.ts";
+import { localShellCallSchema } from "./localShellCallSchema.ts";
+import { MCPApprovalRequestSchema } from "./MCPApprovalRequestSchema.ts";
+import { MCPApprovalResponseSchema } from "./MCPApprovalResponseSchema.ts";
+import { MCPListToolsSchema } from "./MCPListToolsSchema.ts";
+import { MCPToolCallSchema } from "./MCPToolCallSchema.ts";
 import { messageSchema } from "./messageSchema.ts";
 import { reasoningBodySchema } from "./reasoningBodySchema.ts";
+import { webSearchCallSchema } from "./webSearchCallSchema.ts";
 import { z } from "zod";
 
 /**
@@ -17,7 +36,26 @@ export const itemFieldSchema = z
     z.lazy(() => messageSchema),
     z.lazy(() => functionCallSchema),
     z.lazy(() => functionCallOutputSchema),
+    z.lazy(() => fileSearchCallSchema),
+    z.lazy(() => webSearchCallSchema),
+    z.lazy(() => imageGenCallSchema),
+    z.lazy(() => computerCallSchema),
+    z.lazy(() => computerCallOutputSchema),
     z.lazy(() => reasoningBodySchema),
+    z.lazy(() => compactionBodySchema),
+    z.lazy(() => codeInterpreterCallSchema),
+    z.lazy(() => localShellCallSchema),
+    z.lazy(() => localShellCallOutputSchema),
+    z.lazy(() => functionShellCallSchema),
+    z.lazy(() => functionShellCallOutputSchema),
+    z.lazy(() => applyPatchToolCallSchema),
+    z.lazy(() => applyPatchToolCallOutputSchema),
+    z.lazy(() => MCPListToolsSchema),
+    z.lazy(() => MCPApprovalRequestSchema),
+    z.lazy(() => MCPApprovalResponseSchema),
+    z.lazy(() => MCPToolCallSchema),
+    z.lazy(() => customToolCallSchema),
+    z.lazy(() => customToolCallOutputSchema),
   ])
   .describe(
     "An item representing a message, tool call, tool output, reasoning, or other response element.",
