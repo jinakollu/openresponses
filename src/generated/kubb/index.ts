@@ -345,6 +345,7 @@ export { textFormatParamSchema } from "./zod/textFormatParamSchema.ts";
 export { textParamSchema } from "./zod/textParamSchema.ts";
 export { textResponseFormatSchema } from "./zod/textResponseFormatSchema.ts";
 export { toolChoiceParamSchema } from "./zod/toolChoiceParamSchema.ts";
+export { toolChoiceSchema } from "./zod/toolChoiceSchema.ts";
 export { toolChoiceValueEnumSchema } from "./zod/toolChoiceValueEnumSchema.ts";
 export { toolSchema } from "./zod/toolSchema.ts";
 export { topLogProbSchema } from "./zod/topLogProbSchema.ts";

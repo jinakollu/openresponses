@@ -9679,6 +9679,56 @@
         "type": "object",
         "required": ["type", "tools", "mode"]
       },
+      "ToolChoice": {
+        "oneOf": [
+          {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CodeInterpreterToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/FunctionToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/MCPToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/FileSearchToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/WebSearchToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/ImageGenToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/ComputerToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/LocalShellToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/FunctionShellToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/ApplyPatchToolChoice"
+              },
+              {
+                "$ref": "#/components/schemas/CustomToolChoice"
+              }
+            ],
+            "discriminator": {
+              "propertyName": "type"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ToolChoiceValueEnum"
+          },
+          {
+            "$ref": "#/components/schemas/AllowedToolChoice"
+          }
+        ]
+      },
       "TextResponseFormat": {
         "properties": {
           "type": {
@@ -10099,51 +10149,7 @@
             "description": "The tools that were available to the model during response generation."
           },
           "tool_choice": {
-            "oneOf": [
-              {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CodeInterpreterToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FunctionToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/MCPToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FileSearchToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/WebSearchToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ImageGenToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ComputerToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/LocalShellToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/FunctionShellToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ApplyPatchToolChoice"
-                  },
-                  {
-                    "$ref": "#/components/schemas/CustomToolChoice"
-                  }
-                ]
-              },
-              {
-                "$ref": "#/components/schemas/ToolChoiceValueEnum"
-              },
-              {
-                "$ref": "#/components/schemas/AllowedToolChoice"
-              }
-            ]
+            "$ref": "#/components/schemas/ToolChoice"
           },
           "truncation": {
             "allOf": [

@@ -345,6 +345,7 @@ export { textFormatParamSchema } from "./textFormatParamSchema.ts";
 export { textParamSchema } from "./textParamSchema.ts";
 export { textResponseFormatSchema } from "./textResponseFormatSchema.ts";
 export { toolChoiceParamSchema } from "./toolChoiceParamSchema.ts";
+export { toolChoiceSchema } from "./toolChoiceSchema.ts";
 export { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
 export { toolSchema } from "./toolSchema.ts";
 export { topLogProbSchema } from "./topLogProbSchema.ts";

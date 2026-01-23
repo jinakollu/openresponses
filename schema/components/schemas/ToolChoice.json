@@ -1,0 +1,50 @@
+{
+  "oneOf": [
+    {
+      "oneOf": [
+        {
+          "$ref": "./CodeInterpreterToolChoice.json"
+        },
+        {
+          "$ref": "./FunctionToolChoice.json"
+        },
+        {
+          "$ref": "./MCPToolChoice.json"
+        },
+        {
+          "$ref": "./FileSearchToolChoice.json"
+        },
+        {
+          "$ref": "./WebSearchToolChoice.json"
+        },
+        {
+          "$ref": "./ImageGenToolChoice.json"
+        },
+        {
+          "$ref": "./ComputerToolChoice.json"
+        },
+        {
+          "$ref": "./LocalShellToolChoice.json"
+        },
+        {
+          "$ref": "./FunctionShellToolChoice.json"
+        },
+        {
+          "$ref": "./ApplyPatchToolChoice.json"
+        },
+        {
+          "$ref": "./CustomToolChoice.json"
+        }
+      ],
+      "discriminator": {
+        "propertyName": "type"
+      }
+    },
+    {
+      "$ref": "./ToolChoiceValueEnum.json"
+    },
+    {
+      "$ref": "./AllowedToolChoice.json"
+    }
+  ]
+}

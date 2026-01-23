@@ -3,32 +3,20 @@
  * Do not edit manually.
  */
 
-import { allowedToolChoiceSchema } from "./allowedToolChoiceSchema.ts";
-import { applyPatchToolChoiceSchema } from "./applyPatchToolChoiceSchema.ts";
 import { billingSchema } from "./billingSchema.ts";
-import { codeInterpreterToolChoiceSchema } from "./codeInterpreterToolChoiceSchema.ts";
-import { computerToolChoiceSchema } from "./computerToolChoiceSchema.ts";
 import { contextEditSchema } from "./contextEditSchema.ts";
 import { conversationSchema } from "./conversationSchema.ts";
-import { customToolChoiceSchema } from "./customToolChoiceSchema.ts";
 import { errorSchema } from "./errorSchema.ts";
-import { fileSearchToolChoiceSchema } from "./fileSearchToolChoiceSchema.ts";
-import { functionShellToolChoiceSchema } from "./functionShellToolChoiceSchema.ts";
-import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
-import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
 import { incompleteDetailsSchema } from "./incompleteDetailsSchema.ts";
 import { itemFieldSchema } from "./itemFieldSchema.ts";
-import { localShellToolChoiceSchema } from "./localShellToolChoiceSchema.ts";
-import { MCPToolChoiceSchema } from "./MCPToolChoiceSchema.ts";
 import { promptCacheRetentionEnumSchema } from "./promptCacheRetentionEnumSchema.ts";
 import { promptInstructionMessageSchema } from "./promptInstructionMessageSchema.ts";
 import { reasoningSchema } from "./reasoningSchema.ts";
 import { textFieldSchema } from "./textFieldSchema.ts";
-import { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
+import { toolChoiceSchema } from "./toolChoiceSchema.ts";
 import { toolSchema } from "./toolSchema.ts";
 import { truncationEnumSchema } from "./truncationEnumSchema.ts";
 import { usageSchema } from "./usageSchema.ts";
-import { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
 import { z } from "zod";
 
 /**
@@ -105,23 +93,7 @@ export const responseResourceSchema = z
       .describe(
         "The tools that were available to the model during response generation.",
       ),
-    tool_choice: z.union([
-      z.union([
-        z.lazy(() => codeInterpreterToolChoiceSchema),
-        z.lazy(() => functionToolChoiceSchema),
-        z.lazy(() => MCPToolChoiceSchema),
-        z.lazy(() => fileSearchToolChoiceSchema),
-        z.lazy(() => webSearchToolChoiceSchema),
-        z.lazy(() => imageGenToolChoiceSchema),
-        z.lazy(() => computerToolChoiceSchema),
-        z.lazy(() => localShellToolChoiceSchema),
-        z.lazy(() => functionShellToolChoiceSchema),
-        z.lazy(() => applyPatchToolChoiceSchema),
-        z.lazy(() => customToolChoiceSchema),
-      ]),
-      z.lazy(() => toolChoiceValueEnumSchema),
-      z.lazy(() => allowedToolChoiceSchema),
-    ]),
+    tool_choice: z.lazy(() => toolChoiceSchema),
     truncation: z.lazy(() => truncationEnumSchema).and(z.any()),
     parallel_tool_calls: z
       .boolean()

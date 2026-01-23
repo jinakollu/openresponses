@@ -117,51 +117,7 @@
       "description": "The tools that were available to the model during response generation."
     },
     "tool_choice": {
-      "oneOf": [
-        {
-          "oneOf": [
-            {
-              "$ref": "./CodeInterpreterToolChoice.json"
-            },
-            {
-              "$ref": "./FunctionToolChoice.json"
-            },
-            {
-              "$ref": "./MCPToolChoice.json"
-            },
-            {
-              "$ref": "./FileSearchToolChoice.json"
-            },
-            {
-              "$ref": "./WebSearchToolChoice.json"
-            },
-            {
-              "$ref": "./ImageGenToolChoice.json"
-            },
-            {
-              "$ref": "./ComputerToolChoice.json"
-            },
-            {
-              "$ref": "./LocalShellToolChoice.json"
-            },
-            {
-              "$ref": "./FunctionShellToolChoice.json"
-            },
-            {
-              "$ref": "./ApplyPatchToolChoice.json"
-            },
-            {
-              "$ref": "./CustomToolChoice.json"
-            }
-          ]
-        },
-        {
-          "$ref": "./ToolChoiceValueEnum.json"
-        },
-        {
-          "$ref": "./AllowedToolChoice.json"
-        }
-      ]
+      "$ref": "./ToolChoice.json"
     },
     "truncation": {
       "$ref": "./TruncationEnum.json",
