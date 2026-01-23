@@ -373,5 +373,5 @@ export { webSearchPreviewToolParam20250311ParamSchema } from "./webSearchPreview
 export { webSearchPreviewToolParamSchema } from "./webSearchPreviewToolParamSchema.ts";
 export { webSearchPreviewToolSchema } from "./webSearchPreviewToolSchema.ts";
 export { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
-export { webSearchToolParam20250814ParamSchema } from "./webSearchToolParam20250814ParamSchema.ts";
+export { webSearchToolParam20250826ParamSchema } from "./webSearchToolParam20250826ParamSchema.ts";
 export { webSearchToolParamSchema } from "./webSearchToolParamSchema.ts";

@@ -7,7 +7,7 @@ import { approximateLocationParamSchema } from "./approximateLocationParamSchema
 import { searchContextSizeSchema } from "./searchContextSizeSchema.ts";
 import { z } from "zod";
 
-export const webSearchToolParam20250814ParamSchema = z.object({
+export const webSearchToolParam20250826ParamSchema = z.object({
   user_location: z.optional(
     z.lazy(() => approximateLocationParamSchema).and(z.any()),
   ),

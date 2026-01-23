@@ -22,5 +22,5 @@
   },
   "type": "object",
   "required": ["type"],
-  "x-openai-class-name": "responses_common.api.params.tool_param.WebSearchToolParam_2025_08_14"
+  "x-openai-class-name": "responses_common.api.params.tool_param.WebSearchToolParam_2025_08_26"
 }

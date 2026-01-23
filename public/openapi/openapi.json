@@ -3099,7 +3099,7 @@
         "type": "object",
         "required": ["type"]
       },
-      "WebSearchToolParam_2025_08_14Param": {
+      "WebSearchToolParam_2025_08_26Param": {
         "properties": {
           "user_location": {
             "allOf": [
@@ -4551,7 +4551,7 @@
             "$ref": "#/components/schemas/WebSearchToolParam"
           },
           {
-            "$ref": "#/components/schemas/WebSearchToolParam_2025_08_14Param"
+            "$ref": "#/components/schemas/WebSearchToolParam_2025_08_26Param"
           },
           {
             "$ref": "#/components/schemas/WebSearchGADeprecatedToolParam"

@@ -17,7 +17,7 @@ import { MCPToolParamSchema } from "./MCPToolParamSchema.ts";
 import { webSearchGADeprecatedToolParamSchema } from "./webSearchGADeprecatedToolParamSchema.ts";
 import { webSearchPreviewToolParam20250311ParamSchema } from "./webSearchPreviewToolParam20250311ParamSchema.ts";
 import { webSearchPreviewToolParamSchema } from "./webSearchPreviewToolParamSchema.ts";
-import { webSearchToolParam20250814ParamSchema } from "./webSearchToolParam20250814ParamSchema.ts";
+import { webSearchToolParam20250826ParamSchema } from "./webSearchToolParam20250826ParamSchema.ts";
 import { webSearchToolParamSchema } from "./webSearchToolParamSchema.ts";
 import { z } from "zod";
 
@@ -26,7 +26,7 @@ export const responsesToolParamSchema = z.union([
   z.lazy(() => functionToolParamSchema),
   z.lazy(() => customToolParamSchema),
   z.lazy(() => webSearchToolParamSchema),
-  z.lazy(() => webSearchToolParam20250814ParamSchema),
+  z.lazy(() => webSearchToolParam20250826ParamSchema),
   z.lazy(() => webSearchGADeprecatedToolParamSchema),
   z.lazy(() => webSearchPreviewToolParamSchema),
   z.lazy(() => webSearchPreviewToolParam20250311ParamSchema),
