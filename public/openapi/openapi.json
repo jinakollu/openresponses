@@ -9751,7 +9751,10 @@
               {
                 "$ref": "#/components/schemas/JsonSchemaResponseFormat"
               }
-            ]
+            ],
+            "discriminator": {
+              "propertyName": "type"
+            }
           },
           "verbosity": {
             "$ref": "#/components/schemas/VerbosityEnum"

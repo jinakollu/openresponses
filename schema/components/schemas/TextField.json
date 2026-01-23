@@ -11,7 +11,10 @@
         {
           "$ref": "./JsonSchemaResponseFormat.json"
         }
-      ]
+      ],
+      "discriminator": {
+        "propertyName": "type"
+      }
     },
     "verbosity": {
       "$ref": "./VerbosityEnum.json"
