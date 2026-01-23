@@ -5436,7 +5436,7 @@
           "assistant": "Model-generated content in the conversation.",
           "developer": "Developer-supplied guidance that shapes the assistant\u2019s behavior.",
           "system": "System-level instructions that set global behavior.",
-          "user": "End\u2011user input in the conversation."
+          "user": "End-user input in the conversation."
         }
       },
       "InputTextContent": {
@@ -13016,16 +13016,16 @@
           },
           "description": {
             "type": "string",
-            "description": "A description of what the response format is for, used by the model to\ndetermine how to respond in the format.\n"
+            "description": "A description of what the response format is for, used by the model to determine how to respond in the format. "
           },
           "name": {
             "type": "string",
-            "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\nunderscores and dashes, with a maximum length of 64.\n"
+            "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. "
           },
           "schema": {
             "type": "object",
             "title": "JSON schema",
-            "description": "The schema for the response format, described as a JSON Schema object.\n",
+            "description": "The schema for the response format, described as a JSON Schema object. ",
             "additionalProperties": true
           },
           "strict": {
@@ -13033,7 +13033,7 @@
               {
                 "type": "boolean",
                 "default": false,
-                "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined\nin the `schema` field. Only a subset of JSON Schema is supported when\n`strict` is `true`.\n"
+                "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. "
               },
               {
                 "type": "null"
@@ -13050,7 +13050,10 @@
           {
             "$ref": "#/components/schemas/JsonSchemaResponseFormatParam"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       }
     }
   },
