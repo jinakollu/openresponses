@@ -376,3 +376,4 @@ export { webSearchPreviewToolSchema } from "./zod/webSearchPreviewToolSchema.ts"
 export { webSearchToolChoiceSchema } from "./zod/webSearchToolChoiceSchema.ts";
 export { webSearchToolParam20250826ParamSchema } from "./zod/webSearchToolParam20250826ParamSchema.ts";
 export { webSearchToolParamSchema } from "./zod/webSearchToolParamSchema.ts";
+export { webSearchToolSchema } from "./zod/webSearchToolSchema.ts";

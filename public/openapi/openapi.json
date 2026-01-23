@@ -8959,12 +8959,53 @@
         "type": "object",
         "required": ["type", "country", "region", "city", "timezone"]
       },
+      "WebSearchTool": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search"],
+            "description": "The type of the web search tool. Always `web_search`.",
+            "default": "web_search"
+          },
+          "user_location": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ApproximateLocation"
+                  },
+                  {
+                    "description": "The user's location."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "user_location", "search_context_size"],
+        "title": "Web search",
+        "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search)."
+      },
       "WebSearchPreviewTool": {
         "properties": {
           "type": {
             "type": "string",
             "enum": ["web_search_preview"],
-            "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.",
+            "description": "The type of the web search tool. Always `web_search_preview`.",
             "default": "web_search_preview"
           },
           "user_location": {
@@ -9448,6 +9489,9 @@
           },
           {
             "$ref": "#/components/schemas/FunctionTool"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchTool"
           },
           {
             "$ref": "#/components/schemas/WebSearchPreviewTool"

@@ -7,6 +7,9 @@
       "$ref": "./FunctionTool.json"
     },
     {
+      "$ref": "./WebSearchTool.json"
+    },
+    {
       "$ref": "./WebSearchPreviewTool.json"
     },
     {

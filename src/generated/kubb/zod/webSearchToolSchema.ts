@@ -10,14 +10,12 @@ import { z } from "zod";
 /**
  * @description This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).
  */
-export const webSearchPreviewToolSchema = z
+export const webSearchToolSchema = z
   .object({
     type: z
-      .enum(["web_search_preview"])
-      .default("web_search_preview")
-      .describe(
-        "The type of the web search tool. Always `web_search_preview`.",
-      ),
+      .enum(["web_search"])
+      .default("web_search")
+      .describe("The type of the web search tool. Always `web_search`."),
     user_location: z.union([
       z.lazy(() => approximateLocationSchema).and(z.any()),
       z.null(),

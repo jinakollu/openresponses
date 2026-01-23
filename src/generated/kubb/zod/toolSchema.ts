@@ -12,6 +12,7 @@ import { functionToolSchema } from "./functionToolSchema.ts";
 import { imageGenToolSchema } from "./imageGenToolSchema.ts";
 import { MCPToolSchema } from "./MCPToolSchema.ts";
 import { webSearchPreviewToolSchema } from "./webSearchPreviewToolSchema.ts";
+import { webSearchToolSchema } from "./webSearchToolSchema.ts";
 import { z } from "zod";
 
 /**
@@ -21,6 +22,7 @@ export const toolSchema = z
   .union([
     z.lazy(() => fileSearchToolSchema),
     z.lazy(() => functionToolSchema),
+    z.lazy(() => webSearchToolSchema),
     z.lazy(() => webSearchPreviewToolSchema),
     z.lazy(() => MCPToolSchema),
     z.lazy(() => computerUsePreviewToolSchema),
