@@ -1,10 +1,90 @@
 version: 1
 add:
   schemas:
+    # InputVideoContent:
+    #   type: object
+    #   description: A content block representing a video input to the model.
+    #   properties:
+    #     type:
+    #       type: string
+    #       enum:
+    #         - input_video
+    #       description: The type of the input content. Always `input_video`.
+    #     video_url:
+    #       type: string
+    #       description: A base64 or remote url that resolves to a video file.
+    #   required:
+    #     - type
+    #     - video_url
+    JsonSchemaResponseFormatParam:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of response format being defined. Always `json_schema`.
+          enum:
+            - json_schema
+        description:
+          type: string
+          description:
+            "A description of what the response format is for, used by
+            the model to
+
+            determine how to respond in the format.
+
+            "
+        name:
+          type: string
+          description:
+            "The name of the response format. Must be a-z, A-Z, 0-9, or
+            contain
+
+            underscores and dashes, with a maximum length of 64.
+
+            "
+        schema:
+          type: object
+          title: JSON schema
+          description:
+            "The schema for the response format, described as a JSON Schema
+            object.
+
+            "
+          additionalProperties: true
+        strict:
+          anyOf:
+            - type: boolean
+              default: false
+              description:
+                "Whether to enable strict schema adherence when generating
+                the output.
+
+                If set to true, the model will always follow the exact schema defined
+
+                in the `schema` field. Only a subset of JSON Schema is supported when
+
+                `strict` is `true`.
+
+                "
+            - type: "null"
     TextFormatParam:
       oneOf:
         - $ref: "#/components/schemas/TextResponseFormat"
-        - $ref: "#/components/schemas/JsonSchemaResponseFormat"
+        - $ref: "#/components/schemas/JsonSchemaResponseFormatParam"
+  # schema_lists:
+  #   - schema: Message
+  #     keyword: oneOf
+  #     path: /properties/content/items/oneOf
+  #     refs:
+  #       - InputVideoContent
+  #   - schema: FunctionCallOutput
+  #     path: /properties/output/oneOf[1]/items/oneOf
+  #     refs:
+  #       - InputVideoContent
+  #   - schema: FunctionCallOutputItemParam
+  #     path: /properties/output/oneOf[1]/items/oneOf
+  #     refs:
+  #       - InputVideoContent
   schema_fields:
     - schema: CreateResponseBody
       path: /properties/reasoning

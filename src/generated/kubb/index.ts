@@ -199,6 +199,7 @@ export { itemFieldSchema } from "./zod/itemFieldSchema.ts";
 export { itemParamSchema } from "./zod/itemParamSchema.ts";
 export { itemReferenceParamSchema } from "./zod/itemReferenceParamSchema.ts";
 export { jsonObjectResponseFormatSchema } from "./zod/jsonObjectResponseFormatSchema.ts";
+export { jsonSchemaResponseFormatParamSchema } from "./zod/jsonSchemaResponseFormatParamSchema.ts";
 export { jsonSchemaResponseFormatSchema } from "./zod/jsonSchemaResponseFormatSchema.ts";
 export { keyPressActionSchema } from "./zod/keyPressActionSchema.ts";
 export { keyPressParamSchema } from "./zod/keyPressParamSchema.ts";

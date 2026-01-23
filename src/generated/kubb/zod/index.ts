@@ -199,6 +199,7 @@ export { itemFieldSchema } from "./itemFieldSchema.ts";
 export { itemParamSchema } from "./itemParamSchema.ts";
 export { itemReferenceParamSchema } from "./itemReferenceParamSchema.ts";
 export { jsonObjectResponseFormatSchema } from "./jsonObjectResponseFormatSchema.ts";
+export { jsonSchemaResponseFormatParamSchema } from "./jsonSchemaResponseFormatParamSchema.ts";
 export { jsonSchemaResponseFormatSchema } from "./jsonSchemaResponseFormatSchema.ts";
 export { keyPressActionSchema } from "./keyPressActionSchema.ts";
 export { keyPressParamSchema } from "./keyPressParamSchema.ts";
