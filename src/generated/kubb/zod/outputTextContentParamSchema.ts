@@ -16,11 +16,13 @@ export const outputTextContentParamSchema = z.object({
   text: z.string().max(10485760).describe("The text content."),
   annotations: z.optional(
     z
-      .union([
-        z.array(z.lazy(() => fileCitationParamSchema)),
-        z.array(z.lazy(() => urlCitationParamSchema)),
-        z.array(z.lazy(() => containerFileCitationParamSchema)),
-      ])
+      .array(
+        z.union([
+          z.lazy(() => fileCitationParamSchema),
+          z.lazy(() => urlCitationParamSchema),
+          z.lazy(() => containerFileCitationParamSchema),
+        ]),
+      )
       .describe("Citations associated with the text content."),
   ),
 });

@@ -277,26 +277,23 @@
             "description": "The text content."
           },
           "annotations": {
-            "oneOf": [
-              {
-                "items": {
+            "items": {
+              "oneOf": [
+                {
                   "$ref": "#/components/schemas/FileCitationParam"
                 },
-                "type": "array"
-              },
-              {
-                "items": {
+                {
                   "$ref": "#/components/schemas/UrlCitationParam"
                 },
-                "type": "array"
-              },
-              {
-                "items": {
+                {
                   "$ref": "#/components/schemas/ContainerFileCitationParam"
-                },
-                "type": "array"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type"
               }
-            ],
+            },
+            "type": "array",
             "description": "Citations associated with the text content."
           }
         },

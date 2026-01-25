@@ -13,26 +13,23 @@
       "description": "The text content."
     },
     "annotations": {
-      "oneOf": [
-        {
-          "items": {
+      "items": {
+        "oneOf": [
+          {
             "$ref": "./FileCitationParam.json"
           },
-          "type": "array"
-        },
-        {
-          "items": {
+          {
             "$ref": "./UrlCitationParam.json"
           },
-          "type": "array"
-        },
-        {
-          "items": {
+          {
             "$ref": "./ContainerFileCitationParam.json"
-          },
-          "type": "array"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type"
         }
-      ],
+      },
+      "type": "array",
       "description": "Citations associated with the text content."
     }
   },
