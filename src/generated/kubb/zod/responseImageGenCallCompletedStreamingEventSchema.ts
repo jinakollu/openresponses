@@ -14,7 +14,7 @@ export const responseImageGenCallCompletedStreamingEventSchema = z
       .enum(["response.image_generation_call.completed"])
       .default("response.image_generation_call.completed")
       .describe(
-        "The type of the event, always `response.image_gen_call.completed`.",
+        "The type of the event, always `response.image_generation_call.completed`.",
       ),
     sequence_number: z
       .number()

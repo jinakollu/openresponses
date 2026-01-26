@@ -14,7 +14,7 @@ export const responseImageGenCallInProgressStreamingEventSchema = z
       .enum(["response.image_generation_call.in_progress"])
       .default("response.image_generation_call.in_progress")
       .describe(
-        "The type of the event, always `response.image_gen_call.in_progress`.",
+        "The type of the event, always `response.image_generation_call.in_progress`.",
       ),
     sequence_number: z
       .number()

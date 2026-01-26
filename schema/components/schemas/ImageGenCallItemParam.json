@@ -8,22 +8,14 @@
     "type": {
       "type": "string",
       "enum": ["image_generation_call"],
-      "description": "The type of the image generation call. Always `image_gen_call`.",
+      "description": "The type of the image generation call. Always `image_generation_call`.",
       "default": "image_generation_call",
       "x-stainless-const": true
     },
     "status": {
       "anyOf": [
         {
-          "oneOf": [
-            {
-              "$ref": "./ImageGenCallStatus.json"
-            },
-            {
-              "type": "string",
-              "description": "The status of the image generation call."
-            }
-          ],
+          "$ref": "./ImageGenCallStatus.json",
           "description": "The status of the image generation call."
         },
         {

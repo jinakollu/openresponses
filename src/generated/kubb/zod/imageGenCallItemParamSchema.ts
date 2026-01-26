@@ -16,13 +16,10 @@ export const imageGenCallItemParamSchema = z.object({
     .enum(["image_generation_call"])
     .default("image_generation_call")
     .describe(
-      "The type of the image generation call. Always `image_gen_call`.",
+      "The type of the image generation call. Always `image_generation_call`.",
     ),
   status: z.optional(
-    z.union([
-      z.union([z.lazy(() => imageGenCallStatusSchema), z.string()]),
-      z.null(),
-    ]),
+    z.union([z.lazy(() => imageGenCallStatusSchema).and(z.any()), z.null()]),
   ),
   created_by: z.optional(z.union([z.string(), z.null()])),
   revised_prompt: z.optional(z.union([z.string(), z.null()])),

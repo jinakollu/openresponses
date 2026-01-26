@@ -14,7 +14,7 @@ export const responseImageGenCallPartialImageStreamingEventSchema = z
       .enum(["response.image_generation_call.partial_image"])
       .default("response.image_generation_call.partial_image")
       .describe(
-        "The type of the event, always `response.image_gen_call.partial_image`.",
+        "The type of the event, always `response.image_generation_call.partial_image`.",
       ),
     sequence_number: z
       .number()

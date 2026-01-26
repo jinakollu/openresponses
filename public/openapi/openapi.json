@@ -2157,22 +2157,20 @@
           "type": {
             "type": "string",
             "enum": ["image_generation_call"],
-            "description": "The type of the image generation call. Always `image_gen_call`.",
+            "description": "The type of the image generation call. Always `image_generation_call`.",
             "default": "image_generation_call"
           },
           "status": {
             "anyOf": [
               {
-                "oneOf": [
+                "allOf": [
                   {
                     "$ref": "#/components/schemas/ImageGenCallStatus"
                   },
                   {
-                    "type": "string",
                     "description": "The status of the image generation call."
                   }
-                ],
-                "description": "The status of the image generation call."
+                ]
               },
               {
                 "type": "null"
@@ -12089,7 +12087,7 @@
           "type": {
             "type": "string",
             "enum": ["response.image_generation_call.in_progress"],
-            "description": "The type of the event, always `response.image_gen_call.in_progress`.",
+            "description": "The type of the event, always `response.image_generation_call.in_progress`.",
             "default": "response.image_generation_call.in_progress"
           },
           "sequence_number": {
@@ -12115,7 +12113,7 @@
           "type": {
             "type": "string",
             "enum": ["response.image_generation_call.generating"],
-            "description": "The type of the event, always `response.image_gen_call.generating`.",
+            "description": "The type of the event, always `response.image_generation_call.generating`.",
             "default": "response.image_generation_call.generating"
           },
           "sequence_number": {
@@ -12141,7 +12139,7 @@
           "type": {
             "type": "string",
             "enum": ["response.image_generation_call.partial_image"],
-            "description": "The type of the event, always `response.image_gen_call.partial_image`.",
+            "description": "The type of the event, always `response.image_generation_call.partial_image`.",
             "default": "response.image_generation_call.partial_image"
           },
           "sequence_number": {
@@ -12198,7 +12196,7 @@
           "type": {
             "type": "string",
             "enum": ["response.image_generation_call.completed"],
-            "description": "The type of the event, always `response.image_gen_call.completed`.",
+            "description": "The type of the event, always `response.image_generation_call.completed`.",
             "default": "response.image_generation_call.completed"
           },
           "sequence_number": {

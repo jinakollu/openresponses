@@ -3,7 +3,7 @@
     "type": {
       "type": "string",
       "enum": ["response.image_generation_call.generating"],
-      "description": "The type of the event, always `response.image_gen_call.generating`.",
+      "description": "The type of the event, always `response.image_generation_call.generating`.",
       "default": "response.image_generation_call.generating",
       "x-stainless-const": true
     },
