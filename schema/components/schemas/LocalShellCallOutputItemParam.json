@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of the local shell tool call output. Populated when this item is returned via API.",
-          "example": "lsho_123"
+          "examples": ["lsho_123"]
         },
         {
           "type": "null"

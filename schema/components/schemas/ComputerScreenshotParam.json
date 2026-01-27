@@ -24,7 +24,7 @@
         {
           "type": "string",
           "description": "The ID of an uploaded screenshot image file.",
-          "example": "file-123"
+          "examples": ["file-123"]
         },
         {
           "type": "null"

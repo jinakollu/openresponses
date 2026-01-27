@@ -3,7 +3,7 @@
     "id": {
       "type": "string",
       "description": "The unique ID of the image generation call.",
-      "example": "ig_123"
+      "examples": ["ig_123"]
     },
     "type": {
       "type": "string",

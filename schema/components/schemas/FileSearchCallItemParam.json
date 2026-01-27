@@ -3,7 +3,7 @@
     "id": {
       "type": "string",
       "description": "The unique ID of this file search tool call.",
-      "example": "fs_123"
+      "examples": ["fs_123"]
     },
     "type": {
       "type": "string",

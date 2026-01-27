@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of this custom tool call output.",
-          "example": "ctco_123"
+          "examples": ["ctco_123"]
         },
         {
           "type": "null"

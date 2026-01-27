@@ -84,7 +84,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this reasoning item.",
-                "example": "rs_123"
+                "examples": ["rs_123"]
               },
               {
                 "type": "null"
@@ -140,7 +140,7 @@
               {
                 "type": "string",
                 "description": "The ID of the compaction item.",
-                "example": "cmp_123"
+                "examples": ["cmp_123"]
               },
               {
                 "type": "null"
@@ -180,7 +180,7 @@
           "file_id": {
             "type": "string",
             "description": "The ID of the file.",
-            "example": "file-123"
+            "examples": ["file-123"]
           },
           "filename": {
             "type": "string",
@@ -241,12 +241,12 @@
           "container_id": {
             "type": "string",
             "description": "The ID of the container.",
-            "example": "cntr_123"
+            "examples": ["cntr_123"]
           },
           "file_id": {
             "type": "string",
             "description": "The ID of the container file.",
-            "example": "cfile_123"
+            "examples": ["cfile_123"]
           },
           "filename": {
             "type": "string",
@@ -324,7 +324,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this message item.",
-                "example": "msg_123"
+                "examples": ["msg_123"]
               },
               {
                 "type": "null"
@@ -413,7 +413,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this message item.",
-                "example": "msg_123"
+                "examples": ["msg_123"]
               },
               {
                 "type": "null"
@@ -477,7 +477,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this message item.",
-                "example": "msg_123"
+                "examples": ["msg_123"]
               },
               {
                 "type": "null"
@@ -568,7 +568,7 @@
               {
                 "type": "string",
                 "description": "The ID of the file to be sent to the model.",
-                "example": "file-123"
+                "examples": ["file-123"]
               },
               {
                 "type": "null"
@@ -611,7 +611,7 @@
               {
                 "type": "string",
                 "description": "The ID of the file to be sent to the model.",
-                "example": "file-123"
+                "examples": ["file-123"]
               },
               {
                 "type": "null"
@@ -665,7 +665,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this message item.",
-                "example": "msg_123"
+                "examples": ["msg_123"]
               },
               {
                 "type": "null"
@@ -774,7 +774,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this function tool call.",
-                "example": "fc_123"
+                "examples": ["fc_123"]
               },
               {
                 "type": "null"
@@ -832,7 +832,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the function tool call output. Populated when this item is returned via API.",
-                "example": "fc_123"
+                "examples": ["fc_123"]
               },
               {
                 "type": "null"
@@ -912,7 +912,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this custom tool call.",
-                "example": "ctc_123"
+                "examples": ["ctc_123"]
               },
               {
                 "type": "null"
@@ -970,7 +970,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this custom tool call output.",
-                "example": "ctco_123"
+                "examples": ["ctco_123"]
               },
               {
                 "type": "null"
@@ -1145,7 +1145,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the apply patch tool call. Populated when this item is returned via API.",
-                "example": "apc_123"
+                "examples": ["apc_123"]
               },
               {
                 "type": "null"
@@ -1234,7 +1234,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the shell tool call. Populated when this item is returned via API.",
-                "example": "sh_123"
+                "examples": ["sh_123"]
               },
               {
                 "type": "null"
@@ -1368,7 +1368,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the shell tool call output. Populated when this item is returned via API.",
-                "example": "sho_123"
+                "examples": ["sho_123"]
               },
               {
                 "type": "null"
@@ -1430,7 +1430,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the apply patch tool call output. Populated when this item is returned via API.",
-                "example": "apco_123"
+                "examples": ["apco_123"]
               },
               {
                 "type": "null"
@@ -1707,7 +1707,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the computer call.",
-                "example": "cu_123"
+                "examples": ["cu_123"]
               },
               {
                 "type": "null"
@@ -1815,7 +1815,7 @@
               {
                 "type": "string",
                 "description": "The ID of an uploaded screenshot image file.",
-                "example": "file-123"
+                "examples": ["file-123"]
               },
               {
                 "type": "null"
@@ -1845,7 +1845,7 @@
               {
                 "type": "string",
                 "description": "The ID of the computer tool call output.",
-                "example": "cuo_123"
+                "examples": ["cuo_123"]
               },
               {
                 "type": "null"
@@ -2069,7 +2069,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this web search tool call.",
-                "example": "ws_123"
+                "examples": ["ws_123"]
               },
               {
                 "type": "null"
@@ -2152,7 +2152,7 @@
           "id": {
             "type": "string",
             "description": "The unique ID of the image generation call.",
-            "example": "ig_123"
+            "examples": ["ig_123"]
           },
           "type": {
             "type": "string",
@@ -2320,7 +2320,7 @@
           "id": {
             "type": "string",
             "description": "The unique ID of this code interpreter tool call.",
-            "example": "ci_123"
+            "examples": ["ci_123"]
           },
           "type": {
             "type": "string",
@@ -2424,7 +2424,7 @@
           "id": {
             "type": "string",
             "description": "The unique ID of this file search tool call.",
-            "example": "fs_123"
+            "examples": ["fs_123"]
           },
           "type": {
             "type": "string",
@@ -2539,7 +2539,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this local shell tool call.",
-                "example": "lsh_123"
+                "examples": ["lsh_123"]
               },
               {
                 "type": "null"
@@ -2596,7 +2596,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the local shell tool call output. Populated when this item is returned via API.",
-                "example": "lsho_123"
+                "examples": ["lsho_123"]
               },
               {
                 "type": "null"
@@ -2648,7 +2648,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the approval response.",
-                "example": "mcpa_123"
+                "examples": ["mcpa_123"]
               },
               {
                 "type": "null"
@@ -2684,7 +2684,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the approval request.",
-                "example": "mcpr_123"
+                "examples": ["mcpr_123"]
               },
               {
                 "type": "null"
@@ -2821,7 +2821,7 @@
           "file_ids": {
             "items": {
               "type": "string",
-              "example": "file-123"
+              "examples": ["file-123"]
             },
             "type": "array",
             "maxItems": 50,
@@ -2862,7 +2862,7 @@
             "oneOf": [
               {
                 "type": "string",
-                "example": "cntr_123"
+                "examples": ["cntr_123"]
               },
               {
                 "$ref": "#/components/schemas/AutoCodeInterpreterToolParam"
@@ -3265,7 +3265,7 @@
               {
                 "type": "string",
                 "description": "An uploaded file ID for an image mask to apply when editing.",
-                "example": "file-123"
+                "examples": ["file-123"]
               },
               {
                 "type": "null"
@@ -5031,7 +5031,7 @@
           "id": {
             "type": "string",
             "description": "The unique ID of the conversation.",
-            "example": "conv_123"
+            "examples": ["conv_123"]
           }
         },
         "type": "object",
@@ -5079,7 +5079,7 @@
               {
                 "type": "string",
                 "description": "The ID of the response to use as the prior turn for this request.",
-                "example": "resp_123"
+                "examples": ["resp_123"]
               },
               {
                 "type": "null"
@@ -5386,7 +5386,7 @@
                 "oneOf": [
                   {
                     "type": "string",
-                    "example": "conv_123"
+                    "examples": ["conv_123"]
                   },
                   {
                     "$ref": "#/components/schemas/ConversationParam"
@@ -10431,57 +10431,59 @@
         ],
         "title": "The response object",
         "description": "The complete response object that was returned by the Responses API.",
-        "example": {
-          "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
-          "object": "response",
-          "created_at": 1741476777,
-          "status": "completed",
-          "completed_at": 1741476778,
-          "model": "gpt-4o-2024-08-06",
-          "output": [
-            {
-              "type": "message",
-              "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
-              "status": "completed",
-              "role": "assistant",
-              "content": [
-                {
-                  "type": "output_text",
-                  "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
-                  "annotations": []
-                }
-              ]
-            }
-          ],
-          "parallel_tool_calls": true,
-          "reasoning": {},
-          "store": true,
-          "background": false,
-          "temperature": 1,
-          "presence_penalty": 0,
-          "frequency_penalty": 0,
-          "text": {
-            "format": {
-              "type": "text"
-            }
-          },
-          "tool_choice": "auto",
-          "tools": [],
-          "top_p": 1,
-          "truncation": "disabled",
-          "usage": {
-            "input_tokens": 328,
-            "input_tokens_details": {
-              "cached_tokens": 0
+        "examples": [
+          {
+            "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
+            "object": "response",
+            "created_at": 1741476777,
+            "status": "completed",
+            "completed_at": 1741476778,
+            "model": "gpt-4o-2024-08-06",
+            "output": [
+              {
+                "type": "message",
+                "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
+                "status": "completed",
+                "role": "assistant",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
+                    "annotations": []
+                  }
+                ]
+              }
+            ],
+            "parallel_tool_calls": true,
+            "reasoning": {},
+            "store": true,
+            "background": false,
+            "temperature": 1,
+            "presence_penalty": 0,
+            "frequency_penalty": 0,
+            "text": {
+              "format": {
+                "type": "text"
+              }
             },
-            "output_tokens": 52,
-            "output_tokens_details": {
-              "reasoning_tokens": 0
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 1,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 328,
+              "input_tokens_details": {
+                "cached_tokens": 0
+              },
+              "output_tokens": 52,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 380
             },
-            "total_tokens": 380
-          },
-          "metadata": {}
-        }
+            "metadata": {}
+          }
+        ]
       },
       "ResponseCreatedStreamingEvent": {
         "properties": {

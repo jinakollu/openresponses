@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of this web search tool call.",
-          "example": "ws_123"
+          "examples": ["ws_123"]
         },
         {
           "type": "null"

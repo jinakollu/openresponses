@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of the shell tool call. Populated when this item is returned via API.",
-          "example": "sh_123"
+          "examples": ["sh_123"]
         },
         {
           "type": "null"

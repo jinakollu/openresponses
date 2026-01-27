@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of this message item.",
-          "example": "msg_123"
+          "examples": ["msg_123"]
         },
         {
           "type": "null"

@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The ID of the computer tool call output.",
-          "example": "cuo_123"
+          "examples": ["cuo_123"]
         },
         {
           "type": "null"

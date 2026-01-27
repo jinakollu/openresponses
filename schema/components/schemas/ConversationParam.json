@@ -3,7 +3,7 @@
     "id": {
       "type": "string",
       "description": "The unique ID of the conversation.",
-      "example": "conv_123"
+      "examples": ["conv_123"]
     }
   },
   "type": "object",

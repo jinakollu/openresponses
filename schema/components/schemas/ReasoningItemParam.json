@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of this reasoning item.",
-          "example": "rs_123"
+          "examples": ["rs_123"]
         },
         {
           "type": "null"

@@ -17,7 +17,7 @@
         {
           "type": "string",
           "description": "An uploaded file ID for an image mask to apply when editing.",
-          "example": "file-123"
+          "examples": ["file-123"]
         },
         {
           "type": "null"

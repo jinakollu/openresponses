@@ -38,7 +38,7 @@
         {
           "type": "string",
           "description": "The ID of the response to use as the prior turn for this request.",
-          "example": "resp_123"
+          "examples": ["resp_123"]
         },
         {
           "type": "null"
@@ -296,7 +296,7 @@
           "oneOf": [
             {
               "type": "string",
-              "example": "conv_123"
+              "examples": ["conv_123"]
             },
             {
               "$ref": "./ConversationParam.json"

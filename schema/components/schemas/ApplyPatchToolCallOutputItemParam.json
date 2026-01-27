@@ -12,7 +12,7 @@
         {
           "type": "string",
           "description": "The unique ID of the apply patch tool call output. Populated when this item is returned via API.",
-          "example": "apco_123"
+          "examples": ["apco_123"]
         },
         {
           "type": "null"

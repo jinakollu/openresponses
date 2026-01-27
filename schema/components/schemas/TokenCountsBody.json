@@ -41,7 +41,7 @@
         {
           "type": "string",
           "description": "The unique ID of the previous response to the model. Use this to create multi-turn conversations. Learn more about [conversation state](/docs/guides/conversation-state). Cannot be used in conjunction with `conversation`.",
-          "example": "resp_123"
+          "examples": ["resp_123"]
         },
         {
           "type": "null"
