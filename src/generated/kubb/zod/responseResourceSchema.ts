@@ -3,14 +3,9 @@
  * Do not edit manually.
  */
 
-import { billingSchema } from "./billingSchema.ts";
-import { contextEditSchema } from "./contextEditSchema.ts";
-import { conversationSchema } from "./conversationSchema.ts";
 import { errorSchema } from "./errorSchema.ts";
 import { incompleteDetailsSchema } from "./incompleteDetailsSchema.ts";
 import { itemFieldSchema } from "./itemFieldSchema.ts";
-import { promptCacheRetentionEnumSchema } from "./promptCacheRetentionEnumSchema.ts";
-import { promptInstructionMessageSchema } from "./promptInstructionMessageSchema.ts";
 import { reasoningSchema } from "./reasoningSchema.ts";
 import { textFieldSchema } from "./textFieldSchema.ts";
 import { toolChoiceSchema } from "./toolChoiceSchema.ts";
@@ -43,37 +38,7 @@ export const responseResourceSchema = z
     ]),
     model: z.string().describe("The model that generated this response."),
     previous_response_id: z.union([z.string(), z.null()]),
-    next_response_ids: z.optional(
-      z
-        .array(z.string())
-        .describe(
-          "The IDs of responses that were created as follow-ups to this response, if requested.",
-        ),
-    ),
-    instructions: z.union([
-      z.union([
-        z.array(
-          z
-            .lazy(() => promptInstructionMessageSchema)
-            .describe(
-              "A message item that was used as an instruction for generating the response.",
-            ),
-        ),
-        z.string(),
-      ]),
-      z.null(),
-    ]),
-    input: z.optional(
-      z
-        .array(
-          z
-            .lazy(() => itemFieldSchema)
-            .describe(
-              "An item representing a message, tool call, tool output, reasoning, or other response element.",
-            ),
-        )
-        .describe("The input items that were provided to the model."),
-    ),
+    instructions: z.union([z.string(), z.null()]),
     output: z
       .array(
         z
@@ -126,15 +91,7 @@ export const responseResourceSchema = z
       .number()
       .describe("The sampling temperature that was used for this response."),
     reasoning: z.union([z.lazy(() => reasoningSchema).and(z.any()), z.null()]),
-    user: z.union([z.string(), z.null()]),
     usage: z.union([z.lazy(() => usageSchema).and(z.any()), z.null()]),
-    cost_token: z.optional(
-      z
-        .string()
-        .describe(
-          "A signed token that was generated to encode usage and cost information for this response.",
-        ),
-    ),
     max_output_tokens: z.union([z.number().int(), z.null()]),
     max_tool_calls: z.union([z.number().int(), z.null()]),
     store: z
@@ -148,19 +105,6 @@ export const responseResourceSchema = z
     service_tier: z
       .string()
       .describe("The service tier that was used for this response."),
-    context_edits: z.optional(
-      z
-        .array(
-          z
-            .lazy(() => contextEditSchema)
-            .describe(
-              "A record of context management changes that were applied during response generation.",
-            ),
-        )
-        .describe(
-          "The context management edits that were applied while generating this response, if any.",
-        ),
-    ),
     metadata: z
       .any()
       .describe(
@@ -168,16 +112,6 @@ export const responseResourceSchema = z
       ),
     safety_identifier: z.union([z.string(), z.null()]),
     prompt_cache_key: z.union([z.string(), z.null()]),
-    prompt_cache_retention: z.optional(
-      z.union([
-        z.lazy(() => promptCacheRetentionEnumSchema).and(z.any()),
-        z.null(),
-      ]),
-    ),
-    conversation: z.optional(
-      z.union([z.lazy(() => conversationSchema).and(z.any()), z.null()]),
-    ),
-    billing: z.optional(z.lazy(() => billingSchema).and(z.any())),
   })
   .describe(
     "The complete response object that was returned by the Responses API.",

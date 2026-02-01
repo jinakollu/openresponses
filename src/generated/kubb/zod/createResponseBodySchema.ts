@@ -3,11 +3,9 @@
  * Do not edit manually.
  */
 
-import { conversationParamSchema } from "./conversationParamSchema.ts";
 import { includeEnumSchema } from "./includeEnumSchema.ts";
 import { itemParamSchema } from "./itemParamSchema.ts";
 import { metadataParamSchema } from "./metadataParamSchema.ts";
-import { promptCacheRetentionEnumSchema } from "./promptCacheRetentionEnumSchema.ts";
 import { reasoningParamSchema } from "./reasoningParamSchema.ts";
 import { responsesToolParamSchema } from "./responsesToolParamSchema.ts";
 import { serviceTierEnumSchema } from "./serviceTierEnumSchema.ts";
@@ -64,15 +62,8 @@ export const createResponseBodySchema = z.object({
   reasoning: z.optional(
     z.union([z.lazy(() => reasoningParamSchema).and(z.any()), z.null()]),
   ),
-  user: z.optional(z.union([z.string(), z.null()])),
   safety_identifier: z.optional(z.union([z.string(), z.null()])),
   prompt_cache_key: z.optional(z.union([z.string(), z.null()])),
-  prompt_cache_retention: z.optional(
-    z.union([
-      z.lazy(() => promptCacheRetentionEnumSchema).and(z.any()),
-      z.null(),
-    ]),
-  ),
   truncation: z.optional(z.lazy(() => truncationEnumSchema).and(z.any())),
   instructions: z.optional(z.union([z.string(), z.null()])),
   store: z.optional(
@@ -82,10 +73,4 @@ export const createResponseBodySchema = z.object({
   ),
   service_tier: z.optional(z.lazy(() => serviceTierEnumSchema).and(z.any())),
   top_logprobs: z.optional(z.union([z.number().int(), z.null()])),
-  conversation: z.optional(
-    z.union([
-      z.union([z.lazy(() => conversationParamSchema), z.string()]),
-      z.null(),
-    ]),
-  ),
 });

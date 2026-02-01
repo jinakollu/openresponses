@@ -21,7 +21,7 @@ allow:
       - file_data
       - file_url
   oneOf:
-    "paths.POST /responses.responses.200.content.text/event-stream.schema":
+    ResponseStreamingEvent:
       - ResponseCreatedStreamingEvent
       - ResponseQueuedStreamingEvent
       - ResponseInProgressStreamingEvent
@@ -45,31 +45,58 @@ allow:
       - ResponseOutputTextAnnotationAddedStreamingEvent
       - ResponseFunctionCallArgumentsDeltaStreamingEvent
       - ResponseFunctionCallArgumentsDoneStreamingEvent
+      - ResponseWebSearchCallInProgressStreamingEvent
+      - ResponseWebSearchCallSearchingStreamingEvent
+      - ResponseWebSearchCallCompletedStreamingEvent
+      - ResponseImageGenCallInProgressStreamingEvent
+      - ResponseImageGenCallGeneratingStreamingEvent
+      - ResponseImageGenCallPartialImageStreamingEvent
+      - ResponseImageGenCallCompletedStreamingEvent
+      - ImageGenerationPartialImageStreamingEvent
+      - ImageGenerationCompletedStreamingEvent
+      - ImageEditPartialImageStreamingEvent
+      - ImageEditCompletedStreamingEvent
       - ErrorStreamingEvent
     AllowedToolChoice:
       - FunctionToolChoice
+      - WebSearchToolChoice
+      - ImageGenToolChoice
     ResponsesToolParam:
       - FunctionToolParam
+      - WebSearchToolParam
+      - WebSearchToolParam_2025_08_26Param
+      - WebSearchPreviewToolParam
+      - WebSearchPreviewToolParam_2025_03_11Param
+      - ImageGenToolParam
     ItemField:
       - Message
       - FunctionCall
       - FunctionCallOutput
       - ReasoningBody
+      - WebSearchCall
+      - ImageGenCall
     ItemParam:
       - ItemReferenceParam
       - ReasoningItemParam
-      - UserMessageItemParam
-      - SystemMessageItemParam
-      - DeveloperMessageItemParam
-      - AssistantMessageItemParam
+      - MessageItemParam
       - FunctionCallItemParam
       - FunctionCallOutputItemParam
+      - WebSearchCallItemParam
+      - ImageGenCallItemParam
     Tool:
       - FunctionTool
+      - WebSearchTool
+      - WebSearchPreviewTool
+      - ImageGenTool
     SpecificToolChoiceParam:
       - SpecificFunctionParam
+      - SpecificWebSearchParam
+      - SpecificWebSearchPreviewParam
+      - SpecificImageGenParam
     ResponseResource.tool_choice:
       - FunctionToolChoice
+      - WebSearchToolChoice
+      - ImageGenToolChoice
       - ToolChoiceValueEnum
       - AllowedToolChoice
     OutputTextContentParam.annotations:
@@ -80,17 +107,13 @@ allow:
     IncludeEnum:
       - reasoning.encrypted_content
       - message.output_text.logprobs
+      - web_search_call.results
+      - web_search_call.action.sources
     MessageRole:
       - user
       - assistant
       - system
       - developer
-    ReasoningEffortEnum:
-      - none
-      - low
-      - medium
-      - high
-      - xhigh
 
 deny:
   types:
@@ -102,6 +125,12 @@ deny:
     FunctionCall:
       - created_by
     FunctionCallOutput:
+      - created_by
+    WebSearchCall:
+      - created_by
+    ImageGenCall:
+      - created_by
+    ImageGenCallItemParam:
       - created_by
 
     CreateResponseBody:
@@ -136,5 +165,3 @@ deny:
       - FileSearchTool
     ItemField:
       - FileSearchCall
-      - WebSearchCall
-      - ImageGenCall

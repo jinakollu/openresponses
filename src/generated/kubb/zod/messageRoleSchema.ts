@@ -6,12 +6,8 @@
 import { z } from "zod";
 
 export const messageRoleSchema = z.enum([
-  "unknown",
   "user",
   "assistant",
   "system",
-  "critic",
-  "discriminator",
   "developer",
-  "tool",
 ]);

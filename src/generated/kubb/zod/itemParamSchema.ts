@@ -3,25 +3,10 @@
  * Do not edit manually.
  */
 
-import { applyPatchToolCallItemParamSchema } from "./applyPatchToolCallItemParamSchema.ts";
-import { applyPatchToolCallOutputItemParamSchema } from "./applyPatchToolCallOutputItemParamSchema.ts";
-import { codeInterpreterCallItemParamSchema } from "./codeInterpreterCallItemParamSchema.ts";
-import { compactionSummaryItemParamSchema } from "./compactionSummaryItemParamSchema.ts";
-import { computerCallItemParamSchema } from "./computerCallItemParamSchema.ts";
-import { computerCallOutputItemParamSchema } from "./computerCallOutputItemParamSchema.ts";
-import { customToolCallItemParamSchema } from "./customToolCallItemParamSchema.ts";
-import { customToolCallOutputItemParamSchema } from "./customToolCallOutputItemParamSchema.ts";
-import { fileSearchCallItemParamSchema } from "./fileSearchCallItemParamSchema.ts";
 import { functionCallItemParamSchema } from "./functionCallItemParamSchema.ts";
 import { functionCallOutputItemParamSchema } from "./functionCallOutputItemParamSchema.ts";
-import { functionShellCallItemParamSchema } from "./functionShellCallItemParamSchema.ts";
-import { functionShellCallOutputItemParamSchema } from "./functionShellCallOutputItemParamSchema.ts";
 import { imageGenCallItemParamSchema } from "./imageGenCallItemParamSchema.ts";
 import { itemReferenceParamSchema } from "./itemReferenceParamSchema.ts";
-import { localShellCallItemParamSchema } from "./localShellCallItemParamSchema.ts";
-import { localShellCallOutputItemParamSchema } from "./localShellCallOutputItemParamSchema.ts";
-import { MCPApprovalRequestItemParamSchema } from "./MCPApprovalRequestItemParamSchema.ts";
-import { MCPApprovalResponseItemParamSchema } from "./MCPApprovalResponseItemParamSchema.ts";
 import { messageItemParamSchema } from "./messageItemParamSchema.ts";
 import { reasoningItemParamSchema } from "./reasoningItemParamSchema.ts";
 import { webSearchCallItemParamSchema } from "./webSearchCallItemParamSchema.ts";
@@ -30,24 +15,9 @@ import { z } from "zod";
 export const itemParamSchema = z.union([
   z.lazy(() => itemReferenceParamSchema),
   z.lazy(() => reasoningItemParamSchema),
-  z.lazy(() => compactionSummaryItemParamSchema),
   z.lazy(() => messageItemParamSchema),
   z.lazy(() => functionCallItemParamSchema),
   z.lazy(() => functionCallOutputItemParamSchema),
-  z.lazy(() => customToolCallItemParamSchema),
-  z.lazy(() => customToolCallOutputItemParamSchema),
-  z.lazy(() => applyPatchToolCallItemParamSchema),
-  z.lazy(() => functionShellCallItemParamSchema),
-  z.lazy(() => functionShellCallOutputItemParamSchema),
-  z.lazy(() => applyPatchToolCallOutputItemParamSchema),
-  z.lazy(() => computerCallItemParamSchema),
-  z.lazy(() => computerCallOutputItemParamSchema),
   z.lazy(() => webSearchCallItemParamSchema),
   z.lazy(() => imageGenCallItemParamSchema),
-  z.lazy(() => codeInterpreterCallItemParamSchema),
-  z.lazy(() => fileSearchCallItemParamSchema),
-  z.lazy(() => localShellCallItemParamSchema),
-  z.lazy(() => localShellCallOutputItemParamSchema),
-  z.lazy(() => MCPApprovalResponseItemParamSchema),
-  z.lazy(() => MCPApprovalRequestItemParamSchema),
 ]);

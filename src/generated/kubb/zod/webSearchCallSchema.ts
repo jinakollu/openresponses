@@ -20,7 +20,4 @@ export const webSearchCallSchema = z.object({
       z.lazy(() => webSearchCallActionFindInPageSchema),
     ]),
   ),
-  created_by: z.optional(
-    z.string().describe("The identifier of the actor that created the item."),
-  ),
 });

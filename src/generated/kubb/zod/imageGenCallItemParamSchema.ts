@@ -21,7 +21,6 @@ export const imageGenCallItemParamSchema = z.object({
   status: z.optional(
     z.union([z.lazy(() => imageGenCallStatusSchema).and(z.any()), z.null()]),
   ),
-  created_by: z.optional(z.union([z.string(), z.null()])),
   revised_prompt: z.optional(z.union([z.string(), z.null()])),
   result: z.optional(z.union([z.string(), z.null()])),
   size: z.optional(

@@ -24,7 +24,6 @@ export const imageGenCallSchema = z
       ),
     id: z.string().describe("The unique ID of the image generation call."),
     status: z.lazy(() => imageGenCallStatusSchema).and(z.any()),
-    created_by: z.optional(z.string()),
     revised_prompt: z.optional(z.string()),
     result: z.optional(
       z.string().describe("The generated image encoded in base64."),

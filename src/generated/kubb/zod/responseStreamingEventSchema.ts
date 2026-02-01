@@ -8,23 +8,11 @@ import { imageEditCompletedStreamingEventSchema } from "./imageEditCompletedStre
 import { imageEditPartialImageStreamingEventSchema } from "./imageEditPartialImageStreamingEventSchema.ts";
 import { imageGenerationCompletedStreamingEventSchema } from "./imageGenerationCompletedStreamingEventSchema.ts";
 import { imageGenerationPartialImageStreamingEventSchema } from "./imageGenerationPartialImageStreamingEventSchema.ts";
-import { responseApplyPatchCallOperationDiffDeltaStreamingEventSchema } from "./responseApplyPatchCallOperationDiffDeltaStreamingEventSchema.ts";
-import { responseApplyPatchCallOperationDiffDoneStreamingEventSchema } from "./responseApplyPatchCallOperationDiffDoneStreamingEventSchema.ts";
-import { responseCodeInterpreterCallCodeDeltaStreamingEventSchema } from "./responseCodeInterpreterCallCodeDeltaStreamingEventSchema.ts";
-import { responseCodeInterpreterCallCodeDoneStreamingEventSchema } from "./responseCodeInterpreterCallCodeDoneStreamingEventSchema.ts";
-import { responseCodeInterpreterCallCompletedStreamingEventSchema } from "./responseCodeInterpreterCallCompletedStreamingEventSchema.ts";
-import { responseCodeInterpreterCallInProgressStreamingEventSchema } from "./responseCodeInterpreterCallInProgressStreamingEventSchema.ts";
-import { responseCodeInterpreterCallInterpretingStreamingEventSchema } from "./responseCodeInterpreterCallInterpretingStreamingEventSchema.ts";
 import { responseCompletedStreamingEventSchema } from "./responseCompletedStreamingEventSchema.ts";
 import { responseContentPartAddedStreamingEventSchema } from "./responseContentPartAddedStreamingEventSchema.ts";
 import { responseContentPartDoneStreamingEventSchema } from "./responseContentPartDoneStreamingEventSchema.ts";
 import { responseCreatedStreamingEventSchema } from "./responseCreatedStreamingEventSchema.ts";
-import { responseCustomToolCallInputDeltaStreamingEventSchema } from "./responseCustomToolCallInputDeltaStreamingEventSchema.ts";
-import { responseCustomToolCallInputDoneStreamingEventSchema } from "./responseCustomToolCallInputDoneStreamingEventSchema.ts";
 import { responseFailedStreamingEventSchema } from "./responseFailedStreamingEventSchema.ts";
-import { responseFileSearchCallCompletedStreamingEventSchema } from "./responseFileSearchCallCompletedStreamingEventSchema.ts";
-import { responseFileSearchCallInProgressStreamingEventSchema } from "./responseFileSearchCallInProgressStreamingEventSchema.ts";
-import { responseFileSearchCallSearchingStreamingEventSchema } from "./responseFileSearchCallSearchingStreamingEventSchema.ts";
 import { responseFunctionCallArgumentsDeltaStreamingEventSchema } from "./responseFunctionCallArgumentsDeltaStreamingEventSchema.ts";
 import { responseFunctionCallArgumentsDoneStreamingEventSchema } from "./responseFunctionCallArgumentsDoneStreamingEventSchema.ts";
 import { responseImageGenCallCompletedStreamingEventSchema } from "./responseImageGenCallCompletedStreamingEventSchema.ts";
@@ -33,14 +21,6 @@ import { responseImageGenCallInProgressStreamingEventSchema } from "./responseIm
 import { responseImageGenCallPartialImageStreamingEventSchema } from "./responseImageGenCallPartialImageStreamingEventSchema.ts";
 import { responseIncompleteStreamingEventSchema } from "./responseIncompleteStreamingEventSchema.ts";
 import { responseInProgressStreamingEventSchema } from "./responseInProgressStreamingEventSchema.ts";
-import { responseMCPCallArgumentsDeltaStreamingEventSchema } from "./responseMCPCallArgumentsDeltaStreamingEventSchema.ts";
-import { responseMCPCallArgumentsDoneStreamingEventSchema } from "./responseMCPCallArgumentsDoneStreamingEventSchema.ts";
-import { responseMCPCallCompletedStreamingEventSchema } from "./responseMCPCallCompletedStreamingEventSchema.ts";
-import { responseMCPCallFailedStreamingEventSchema } from "./responseMCPCallFailedStreamingEventSchema.ts";
-import { responseMCPCallInProgressStreamingEventSchema } from "./responseMCPCallInProgressStreamingEventSchema.ts";
-import { responseMCPListToolsCompletedStreamingEventSchema } from "./responseMCPListToolsCompletedStreamingEventSchema.ts";
-import { responseMCPListToolsFailedStreamingEventSchema } from "./responseMCPListToolsFailedStreamingEventSchema.ts";
-import { responseMCPListToolsInProgressStreamingEventSchema } from "./responseMCPListToolsInProgressStreamingEventSchema.ts";
 import { responseOutputItemAddedStreamingEventSchema } from "./responseOutputItemAddedStreamingEventSchema.ts";
 import { responseOutputItemDoneStreamingEventSchema } from "./responseOutputItemDoneStreamingEventSchema.ts";
 import { responseOutputTextAnnotationAddedStreamingEventSchema } from "./responseOutputTextAnnotationAddedStreamingEventSchema.ts";
@@ -55,9 +35,6 @@ import { responseReasoningSummaryPartAddedStreamingEventSchema } from "./respons
 import { responseReasoningSummaryPartDoneStreamingEventSchema } from "./responseReasoningSummaryPartDoneStreamingEventSchema.ts";
 import { responseRefusalDeltaStreamingEventSchema } from "./responseRefusalDeltaStreamingEventSchema.ts";
 import { responseRefusalDoneStreamingEventSchema } from "./responseRefusalDoneStreamingEventSchema.ts";
-import { responseShellCallCommandAddedStreamingEventSchema } from "./responseShellCallCommandAddedStreamingEventSchema.ts";
-import { responseShellCallCommandDeltaStreamingEventSchema } from "./responseShellCallCommandDeltaStreamingEventSchema.ts";
-import { responseShellCallCommandDoneStreamingEventSchema } from "./responseShellCallCommandDoneStreamingEventSchema.ts";
 import { responseWebSearchCallCompletedStreamingEventSchema } from "./responseWebSearchCallCompletedStreamingEventSchema.ts";
 import { responseWebSearchCallInProgressStreamingEventSchema } from "./responseWebSearchCallInProgressStreamingEventSchema.ts";
 import { responseWebSearchCallSearchingStreamingEventSchema } from "./responseWebSearchCallSearchingStreamingEventSchema.ts";
@@ -87,36 +64,13 @@ export const responseStreamingEventSchema = z.union([
   z.lazy(() => responseOutputTextAnnotationAddedStreamingEventSchema),
   z.lazy(() => responseFunctionCallArgumentsDeltaStreamingEventSchema),
   z.lazy(() => responseFunctionCallArgumentsDoneStreamingEventSchema),
-  z.lazy(() => responseCustomToolCallInputDeltaStreamingEventSchema),
-  z.lazy(() => responseCustomToolCallInputDoneStreamingEventSchema),
-  z.lazy(() => responseShellCallCommandAddedStreamingEventSchema),
-  z.lazy(() => responseShellCallCommandDeltaStreamingEventSchema),
-  z.lazy(() => responseShellCallCommandDoneStreamingEventSchema),
-  z.lazy(() => responseFileSearchCallInProgressStreamingEventSchema),
-  z.lazy(() => responseFileSearchCallSearchingStreamingEventSchema),
-  z.lazy(() => responseFileSearchCallCompletedStreamingEventSchema),
   z.lazy(() => responseWebSearchCallInProgressStreamingEventSchema),
   z.lazy(() => responseWebSearchCallSearchingStreamingEventSchema),
   z.lazy(() => responseWebSearchCallCompletedStreamingEventSchema),
-  z.lazy(() => responseCodeInterpreterCallInProgressStreamingEventSchema),
-  z.lazy(() => responseCodeInterpreterCallInterpretingStreamingEventSchema),
-  z.lazy(() => responseCodeInterpreterCallCodeDeltaStreamingEventSchema),
-  z.lazy(() => responseCodeInterpreterCallCodeDoneStreamingEventSchema),
-  z.lazy(() => responseCodeInterpreterCallCompletedStreamingEventSchema),
-  z.lazy(() => responseApplyPatchCallOperationDiffDeltaStreamingEventSchema),
-  z.lazy(() => responseApplyPatchCallOperationDiffDoneStreamingEventSchema),
   z.lazy(() => responseImageGenCallInProgressStreamingEventSchema),
   z.lazy(() => responseImageGenCallGeneratingStreamingEventSchema),
   z.lazy(() => responseImageGenCallPartialImageStreamingEventSchema),
   z.lazy(() => responseImageGenCallCompletedStreamingEventSchema),
-  z.lazy(() => responseMCPListToolsInProgressStreamingEventSchema),
-  z.lazy(() => responseMCPListToolsFailedStreamingEventSchema),
-  z.lazy(() => responseMCPListToolsCompletedStreamingEventSchema),
-  z.lazy(() => responseMCPCallInProgressStreamingEventSchema),
-  z.lazy(() => responseMCPCallFailedStreamingEventSchema),
-  z.lazy(() => responseMCPCallCompletedStreamingEventSchema),
-  z.lazy(() => responseMCPCallArgumentsDeltaStreamingEventSchema),
-  z.lazy(() => responseMCPCallArgumentsDoneStreamingEventSchema),
   z.lazy(() => imageGenerationPartialImageStreamingEventSchema),
   z.lazy(() => imageGenerationCompletedStreamingEventSchema),
   z.lazy(() => imageEditPartialImageStreamingEventSchema),
