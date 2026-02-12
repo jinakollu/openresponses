@@ -4,9 +4,7 @@
  */
 
 import { functionCallStatusSchema } from "./functionCallStatusSchema.ts";
-import { inputFileContentParamSchema } from "./inputFileContentParamSchema.ts";
-import { inputImageContentParamAutoParamSchema } from "./inputImageContentParamAutoParamSchema.ts";
-import { inputTextContentParamSchema } from "./inputTextContentParamSchema.ts";
+import { inputContentParamSchema } from "./inputContentParamSchema.ts";
 import { z } from "zod";
 
 /**
@@ -32,11 +30,7 @@ export const functionCallOutputItemParamSchema = z
       .union([
         z.array(
           z
-            .union([
-              z.lazy(() => inputTextContentParamSchema),
-              z.lazy(() => inputImageContentParamAutoParamSchema),
-              z.lazy(() => inputFileContentParamSchema),
-            ])
+            .lazy(() => inputContentParamSchema)
             .describe(
               "A piece of message content, such as text, an image, or a file.",
             ),

@@ -52,6 +52,7 @@ export { imageUsageOutputTokensDetailsSchema } from "./zod/imageUsageOutputToken
 export { imageUsageSchema } from "./zod/imageUsageSchema.ts";
 export { includeEnumSchema } from "./zod/includeEnumSchema.ts";
 export { incompleteDetailsSchema } from "./zod/incompleteDetailsSchema.ts";
+export { inputContentParamSchema } from "./zod/inputContentParamSchema.ts";
 export { inputFidelitySchema } from "./zod/inputFidelitySchema.ts";
 export { inputFileContentParamSchema } from "./zod/inputFileContentParamSchema.ts";
 export { inputFileContentSchema } from "./zod/inputFileContentSchema.ts";

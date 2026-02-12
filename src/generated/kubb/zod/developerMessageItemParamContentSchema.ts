@@ -10,5 +10,12 @@ import { z } from "zod";
  * @description The message content, as an array of content parts.
  */
 export const developerMessageItemParamContentSchema = z
-  .union([z.array(z.lazy(() => inputTextContentParamSchema)), z.string()])
+  .union([
+    z.array(
+      z
+        .lazy(() => inputTextContentParamSchema)
+        .describe("A text input to the model."),
+    ),
+    z.string(),
+  ])
   .describe("The message content, as an array of content parts.");

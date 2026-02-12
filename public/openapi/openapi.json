@@ -301,14 +301,7 @@
         "oneOf": [
           {
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/InputTextContentParam"
-                }
-              ],
-              "discriminator": {
-                "propertyName": "type"
-              }
+              "$ref": "#/components/schemas/InputTextContentParam"
             },
             "type": "array"
           },
@@ -362,14 +355,7 @@
         "oneOf": [
           {
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/InputTextContentParam"
-                }
-              ],
-              "discriminator": {
-                "propertyName": "type"
-              }
+              "$ref": "#/components/schemas/InputTextContentParam"
             },
             "type": "array"
           },
@@ -519,25 +505,28 @@
         "title": "Input file",
         "description": "A file input to the model."
       },
+      "InputContentParam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InputTextContentParam"
+          },
+          {
+            "$ref": "#/components/schemas/InputImageContentParamAutoParam"
+          },
+          {
+            "$ref": "#/components/schemas/InputFileContentParam"
+          }
+        ],
+        "description": "A piece of message content, such as text, an image, or a file.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "UserMessageItemParamContent": {
         "oneOf": [
           {
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/InputTextContentParam"
-                },
-                {
-                  "$ref": "#/components/schemas/InputImageContentParamAutoParam"
-                },
-                {
-                  "$ref": "#/components/schemas/InputFileContentParam"
-                }
-              ],
-              "description": "A piece of message content, such as text, an image, or a file.",
-              "discriminator": {
-                "propertyName": "type"
-              }
+              "$ref": "#/components/schemas/InputContentParam"
             },
             "type": "array"
           },
@@ -720,21 +709,7 @@
               },
               {
                 "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/InputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputImageContentParamAutoParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputFileContentParam"
-                    }
-                  ],
-                  "description": "A piece of message content, such as text, an image, or a file.",
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
+                  "$ref": "#/components/schemas/InputContentParam"
                 },
                 "type": "array",
                 "description": "An array of content outputs (text, image, file) for the function tool call."

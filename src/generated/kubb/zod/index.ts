@@ -52,6 +52,7 @@ export { imageUsageOutputTokensDetailsSchema } from "./imageUsageOutputTokensDet
 export { imageUsageSchema } from "./imageUsageSchema.ts";
 export { includeEnumSchema } from "./includeEnumSchema.ts";
 export { incompleteDetailsSchema } from "./incompleteDetailsSchema.ts";
+export { inputContentParamSchema } from "./inputContentParamSchema.ts";
 export { inputFidelitySchema } from "./inputFidelitySchema.ts";
 export { inputFileContentParamSchema } from "./inputFileContentParamSchema.ts";
 export { inputFileContentSchema } from "./inputFileContentSchema.ts";

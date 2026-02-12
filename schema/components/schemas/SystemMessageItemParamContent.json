@@ -2,14 +2,7 @@
   "oneOf": [
     {
       "items": {
-        "oneOf": [
-          {
-            "$ref": "./InputTextContentParam.json"
-          }
-        ],
-        "discriminator": {
-          "propertyName": "type"
-        }
+        "$ref": "./InputTextContentParam.json"
       },
       "type": "array"
     },

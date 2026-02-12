@@ -34,21 +34,7 @@
         },
         {
           "items": {
-            "oneOf": [
-              {
-                "$ref": "./InputTextContentParam.json"
-              },
-              {
-                "$ref": "./InputImageContentParamAutoParam.json"
-              },
-              {
-                "$ref": "./InputFileContentParam.json"
-              }
-            ],
-            "description": "A piece of message content, such as text, an image, or a file.",
-            "discriminator": {
-              "propertyName": "type"
-            }
+            "$ref": "./InputContentParam.json"
           },
           "type": "array",
           "description": "An array of content outputs (text, image, file) for the function tool call."
