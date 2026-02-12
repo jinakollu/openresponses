@@ -7,7 +7,10 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["message"]
+          "enum": ["message"],
+          "description": "The item type. Always `message`.",
+          "default": "message",
+          "x-stainless-const": true
         }
       }
     },
@@ -28,8 +31,8 @@
       ],
       "discriminator": {
         "propertyName": "role"
-      },
-      "x-openai-class-name": "responses_common.api.params.input_item_param.MessageItemParam"
+      }
     }
-  ]
+  ],
+  "x-openai-class-name": "responses_common.api.params.input_item_param.MessageItemParam"
 }

@@ -18,6 +18,9 @@ export const messageItemParamSchema = z
   ])
   .and(
     z.object({
-      type: z.enum(["message"]),
+      type: z
+        .enum(["message"])
+        .default("message")
+        .describe("The item type. Always `message`."),
     }),
   );
