@@ -5,7 +5,6 @@
 
 import { z } from "zod";
 
-export const imageGenToolModelSchema = z.union([
-  z.string(),
-  z.enum(["gpt-image-1", "gpt-image-1-mini"]),
-]);
+export const imageGenToolModelSchema = z
+  .enum(["gpt-image-1", "gpt-image-1-mini", "gpt-image-1.5"])
+  .default("gpt-image-1");

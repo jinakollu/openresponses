@@ -1,12 +1,6 @@
 {
-  "anyOf": [
-    {
-      "type": "string"
-    },
-    {
-      "type": "string",
-      "enum": ["gpt-image-1", "gpt-image-1-mini"]
-    }
-  ],
+  "type": "string",
+  "enum": ["gpt-image-1", "gpt-image-1-mini", "gpt-image-1.5"],
+  "default": "gpt-image-1",
   "x-openai-class-name": "responses_common.api.params.tool_param.ImageGenToolModel"
 }
