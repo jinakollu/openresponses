@@ -126,6 +126,7 @@ export { serviceTierEnumSchema } from "./zod/serviceTierEnumSchema.ts";
 export { specificFunctionParamSchema } from "./zod/specificFunctionParamSchema.ts";
 export { specificImageGenParamSchema } from "./zod/specificImageGenParamSchema.ts";
 export { specificToolChoiceParamSchema } from "./zod/specificToolChoiceParamSchema.ts";
+export { specificToolChoiceSchema } from "./zod/specificToolChoiceSchema.ts";
 export { specificWebSearchParamSchema } from "./zod/specificWebSearchParamSchema.ts";
 export { specificWebSearchPreviewParamSchema } from "./zod/specificWebSearchPreviewParamSchema.ts";
 export { streamOptionsParamSchema } from "./zod/streamOptionsParamSchema.ts";

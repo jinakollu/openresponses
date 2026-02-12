@@ -126,6 +126,7 @@ export { serviceTierEnumSchema } from "./serviceTierEnumSchema.ts";
 export { specificFunctionParamSchema } from "./specificFunctionParamSchema.ts";
 export { specificImageGenParamSchema } from "./specificImageGenParamSchema.ts";
 export { specificToolChoiceParamSchema } from "./specificToolChoiceParamSchema.ts";
+export { specificToolChoiceSchema } from "./specificToolChoiceSchema.ts";
 export { specificWebSearchParamSchema } from "./specificWebSearchParamSchema.ts";
 export { specificWebSearchPreviewParamSchema } from "./specificWebSearchPreviewParamSchema.ts";
 export { streamOptionsParamSchema } from "./streamOptionsParamSchema.ts";

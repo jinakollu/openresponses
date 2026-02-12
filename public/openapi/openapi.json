@@ -3331,6 +3331,22 @@
         "type": "object",
         "required": ["type"]
       },
+      "SpecificToolChoice": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FunctionToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenToolChoice"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "AllowedToolChoice": {
         "properties": {
           "type": {
@@ -3367,20 +3383,7 @@
       "ToolChoice": {
         "oneOf": [
           {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/FunctionToolChoice"
-              },
-              {
-                "$ref": "#/components/schemas/WebSearchToolChoice"
-              },
-              {
-                "$ref": "#/components/schemas/ImageGenToolChoice"
-              }
-            ],
-            "discriminator": {
-              "propertyName": "type"
-            }
+            "$ref": "#/components/schemas/SpecificToolChoice"
           },
           {
             "$ref": "#/components/schemas/ToolChoiceValueEnum"

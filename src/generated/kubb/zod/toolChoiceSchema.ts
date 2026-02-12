@@ -4,18 +4,12 @@
  */
 
 import { allowedToolChoiceSchema } from "./allowedToolChoiceSchema.ts";
-import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
-import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
+import { specificToolChoiceSchema } from "./specificToolChoiceSchema.ts";
 import { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
-import { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
 import { z } from "zod";
 
 export const toolChoiceSchema = z.union([
-  z.union([
-    z.lazy(() => functionToolChoiceSchema),
-    z.lazy(() => webSearchToolChoiceSchema),
-    z.lazy(() => imageGenToolChoiceSchema),
-  ]),
+  z.lazy(() => specificToolChoiceSchema),
   z.lazy(() => toolChoiceValueEnumSchema),
   z.lazy(() => allowedToolChoiceSchema),
 ]);
