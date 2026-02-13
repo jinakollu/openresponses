@@ -12,6 +12,13 @@
         }
       ]
     },
+    "type": {
+      "type": "string",
+      "enum": ["message"],
+      "description": "The item type. Always `message`.",
+      "default": "message",
+      "x-stainless-const": true
+    },
     "role": {
       "type": "string",
       "enum": ["developer"],

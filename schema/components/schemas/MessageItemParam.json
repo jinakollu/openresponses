@@ -1,38 +1,19 @@
 {
-  "type": "object",
-  "allOf": [
+  "oneOf": [
     {
-      "type": "object",
-      "required": ["type"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["message"],
-          "description": "The item type. Always `message`.",
-          "default": "message",
-          "x-stainless-const": true
-        }
-      }
+      "$ref": "./AssistantMessageItemParam.json"
     },
     {
-      "oneOf": [
-        {
-          "$ref": "./AssistantMessageItemParam.json"
-        },
-        {
-          "$ref": "./DeveloperMessageItemParam.json"
-        },
-        {
-          "$ref": "./SystemMessageItemParam.json"
-        },
-        {
-          "$ref": "./UserMessageItemParam.json"
-        }
-      ],
-      "discriminator": {
-        "propertyName": "role"
-      }
+      "$ref": "./DeveloperMessageItemParam.json"
+    },
+    {
+      "$ref": "./SystemMessageItemParam.json"
+    },
+    {
+      "$ref": "./UserMessageItemParam.json"
     }
   ],
-  "x-openai-class-name": "responses_common.api.params.input_item_param.MessageItemParam"
+  "discriminator": {
+    "propertyName": "role"
+  }
 }

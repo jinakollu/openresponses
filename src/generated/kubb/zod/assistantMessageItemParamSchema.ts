@@ -8,6 +8,12 @@ import { z } from "zod";
 
 export const assistantMessageItemParamSchema = z.object({
   id: z.optional(z.union([z.string(), z.null()])),
+  type: z.optional(
+    z
+      .enum(["message"])
+      .default("message")
+      .describe("The item type. Always `message`."),
+  ),
   role: z
     .enum(["assistant"])
     .default("assistant")

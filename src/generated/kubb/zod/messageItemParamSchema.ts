@@ -9,18 +9,9 @@ import { systemMessageItemParamSchema } from "./systemMessageItemParamSchema.ts"
 import { userMessageItemParamSchema } from "./userMessageItemParamSchema.ts";
 import { z } from "zod";
 
-export const messageItemParamSchema = z
-  .union([
-    z.lazy(() => assistantMessageItemParamSchema),
-    z.lazy(() => developerMessageItemParamSchema),
-    z.lazy(() => systemMessageItemParamSchema),
-    z.lazy(() => userMessageItemParamSchema),
-  ])
-  .and(
-    z.object({
-      type: z
-        .enum(["message"])
-        .default("message")
-        .describe("The item type. Always `message`."),
-    }),
-  );
+export const messageItemParamSchema = z.union([
+  z.lazy(() => assistantMessageItemParamSchema),
+  z.lazy(() => developerMessageItemParamSchema),
+  z.lazy(() => systemMessageItemParamSchema),
+  z.lazy(() => userMessageItemParamSchema),
+]);

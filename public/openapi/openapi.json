@@ -252,6 +252,12 @@
               }
             ]
           },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
           "role": {
             "type": "string",
             "enum": ["assistant"],
@@ -327,6 +333,12 @@
               }
             ]
           },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
           "role": {
             "type": "string",
             "enum": ["developer"],
@@ -380,6 +392,12 @@
                 "type": "null"
               }
             ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
           },
           "role": {
             "type": "string",
@@ -552,6 +570,12 @@
               }
             ]
           },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
           "role": {
             "type": "string",
             "enum": ["user"],
@@ -577,40 +601,23 @@
         "required": ["role", "content"]
       },
       "MessageItemParam": {
-        "type": "object",
-        "allOf": [
+        "oneOf": [
           {
-            "type": "object",
-            "required": ["type"],
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": ["message"],
-                "description": "The item type. Always `message`.",
-                "default": "message"
-              }
-            }
+            "$ref": "#/components/schemas/AssistantMessageItemParam"
           },
           {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AssistantMessageItemParam"
-              },
-              {
-                "$ref": "#/components/schemas/DeveloperMessageItemParam"
-              },
-              {
-                "$ref": "#/components/schemas/SystemMessageItemParam"
-              },
-              {
-                "$ref": "#/components/schemas/UserMessageItemParam"
-              }
-            ],
-            "discriminator": {
-              "propertyName": "role"
-            }
+            "$ref": "#/components/schemas/DeveloperMessageItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/SystemMessageItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/UserMessageItemParam"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "role"
+        }
       },
       "FunctionCallItemStatus": {
         "type": "string",
