@@ -122,6 +122,7 @@ export { responseWebSearchCallCompletedStreamingEventSchema } from "./responseWe
 export { responseWebSearchCallInProgressStreamingEventSchema } from "./responseWebSearchCallInProgressStreamingEventSchema.ts";
 export { responseWebSearchCallSearchingStreamingEventSchema } from "./responseWebSearchCallSearchingStreamingEventSchema.ts";
 export { searchContextSizeSchema } from "./searchContextSizeSchema.ts";
+export { searchFiltersParamSchema } from "./searchFiltersParamSchema.ts";
 export { serviceTierEnumSchema } from "./serviceTierEnumSchema.ts";
 export { specificFunctionParamSchema } from "./specificFunctionParamSchema.ts";
 export { specificImageGenParamSchema } from "./specificImageGenParamSchema.ts";

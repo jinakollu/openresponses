@@ -122,6 +122,7 @@ export { responseWebSearchCallCompletedStreamingEventSchema } from "./zod/respon
 export { responseWebSearchCallInProgressStreamingEventSchema } from "./zod/responseWebSearchCallInProgressStreamingEventSchema.ts";
 export { responseWebSearchCallSearchingStreamingEventSchema } from "./zod/responseWebSearchCallSearchingStreamingEventSchema.ts";
 export { searchContextSizeSchema } from "./zod/searchContextSizeSchema.ts";
+export { searchFiltersParamSchema } from "./zod/searchFiltersParamSchema.ts";
 export { serviceTierEnumSchema } from "./zod/serviceTierEnumSchema.ts";
 export { specificFunctionParamSchema } from "./zod/specificFunctionParamSchema.ts";
 export { specificImageGenParamSchema } from "./zod/specificImageGenParamSchema.ts";

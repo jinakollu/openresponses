@@ -5,6 +5,7 @@
 
 import { approximateLocationParamSchema } from "./approximateLocationParamSchema.ts";
 import { searchContextSizeSchema } from "./searchContextSizeSchema.ts";
+import { searchFiltersParamSchema } from "./searchFiltersParamSchema.ts";
 import { z } from "zod";
 
 export const webSearchToolParamSchema = z.object({
@@ -25,4 +26,5 @@ export const webSearchToolParamSchema = z.object({
         "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.",
       ),
   ),
+  filters: z.optional(z.lazy(() => searchFiltersParamSchema).and(z.any())),
 });

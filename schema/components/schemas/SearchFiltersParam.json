@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "allowed_domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Allowed domains for the search. If not provided, all domains are allowed. Subdomains of the provided domains are allowed as well."
+    }
+  }
+}

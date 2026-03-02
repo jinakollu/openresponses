@@ -18,6 +18,10 @@
     "external_web_access": {
       "type": "boolean",
       "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+    },
+    "filters": {
+      "$ref": "./SearchFiltersParam.json",
+      "description": "Filters for the search."
     }
   },
   "type": "object",

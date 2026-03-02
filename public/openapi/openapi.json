@@ -1254,6 +1254,18 @@
         "type": "string",
         "enum": ["low", "medium", "high"]
       },
+      "SearchFiltersParam": {
+        "type": "object",
+        "properties": {
+          "allowed_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed domains for the search. If not provided, all domains are allowed. Subdomains of the provided domains are allowed as well."
+          }
+        }
+      },
       "WebSearchToolParam": {
         "properties": {
           "user_location": {
@@ -1285,6 +1297,16 @@
           "external_web_access": {
             "type": "boolean",
             "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchFiltersParam"
+              },
+              {
+                "description": "Filters for the search."
+              }
+            ]
           }
         },
         "type": "object",
@@ -1321,6 +1343,16 @@
           "external_web_access": {
             "type": "boolean",
             "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchFiltersParam"
+              },
+              {
+                "description": "Filters for the search."
+              }
+            ]
           }
         },
         "type": "object",
