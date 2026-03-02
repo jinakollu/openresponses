@@ -2970,6 +2970,10 @@
       },
       "Error": {
         "properties": {
+          "type": {
+            "type": "string",
+            "description": "The error type that was emitted."
+          },
           "code": {
             "type": "string",
             "description": "A machine-readable error code that was returned."
@@ -2977,10 +2981,29 @@
           "message": {
             "type": "string",
             "description": "A human-readable description of the error that was returned."
+          },
+          "param": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The parameter name that was associated with the error, if any."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "headers": {
+            "additionalProperties": {
+              "type": "string",
+              "description": "The header value that was emitted."
+            },
+            "type": "object",
+            "description": "The response headers that were emitted with the error, if any."
           }
         },
         "type": "object",
-        "required": ["code", "message"],
+        "required": ["type", "code", "message"],
         "title": "Error",
         "description": "An error that occurred while generating the response."
       },

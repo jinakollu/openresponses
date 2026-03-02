@@ -10,11 +10,21 @@ import { z } from "zod";
  */
 export const errorSchema = z
   .object({
+    type: z.string().describe("The error type that was emitted."),
     code: z
       .string()
       .describe("A machine-readable error code that was returned."),
     message: z
       .string()
       .describe("A human-readable description of the error that was returned."),
+    param: z.optional(z.union([z.string(), z.null()])),
+    headers: z.optional(
+      z
+        .object({})
+        .catchall(z.string().describe("The header value that was emitted."))
+        .describe(
+          "The response headers that were emitted with the error, if any.",
+        ),
+    ),
   })
   .describe("An error that occurred while generating the response.");
