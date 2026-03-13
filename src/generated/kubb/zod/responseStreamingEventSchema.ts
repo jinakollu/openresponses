@@ -12,6 +12,8 @@ import { responseCompletedStreamingEventSchema } from "./responseCompletedStream
 import { responseContentPartAddedStreamingEventSchema } from "./responseContentPartAddedStreamingEventSchema.ts";
 import { responseContentPartDoneStreamingEventSchema } from "./responseContentPartDoneStreamingEventSchema.ts";
 import { responseCreatedStreamingEventSchema } from "./responseCreatedStreamingEventSchema.ts";
+import { responseCustomToolCallInputDeltaStreamingEventSchema } from "./responseCustomToolCallInputDeltaStreamingEventSchema.ts";
+import { responseCustomToolCallInputDoneStreamingEventSchema } from "./responseCustomToolCallInputDoneStreamingEventSchema.ts";
 import { responseFailedStreamingEventSchema } from "./responseFailedStreamingEventSchema.ts";
 import { responseFunctionCallArgumentsDeltaStreamingEventSchema } from "./responseFunctionCallArgumentsDeltaStreamingEventSchema.ts";
 import { responseFunctionCallArgumentsDoneStreamingEventSchema } from "./responseFunctionCallArgumentsDoneStreamingEventSchema.ts";
@@ -64,6 +66,8 @@ export const responseStreamingEventSchema = z.union([
   z.lazy(() => responseOutputTextAnnotationAddedStreamingEventSchema),
   z.lazy(() => responseFunctionCallArgumentsDeltaStreamingEventSchema),
   z.lazy(() => responseFunctionCallArgumentsDoneStreamingEventSchema),
+  z.lazy(() => responseCustomToolCallInputDeltaStreamingEventSchema),
+  z.lazy(() => responseCustomToolCallInputDoneStreamingEventSchema),
   z.lazy(() => responseWebSearchCallInProgressStreamingEventSchema),
   z.lazy(() => responseWebSearchCallSearchingStreamingEventSchema),
   z.lazy(() => responseWebSearchCallCompletedStreamingEventSchema),

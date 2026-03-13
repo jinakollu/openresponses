@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { customToolParamSchema } from "./customToolParamSchema.ts";
 import { functionToolParamSchema } from "./functionToolParamSchema.ts";
 import { imageGenToolParamSchema } from "./imageGenToolParamSchema.ts";
 import { webSearchPreviewToolParam20250311ParamSchema } from "./webSearchPreviewToolParam20250311ParamSchema.ts";
@@ -13,6 +14,7 @@ import { z } from "zod";
 
 export const responsesToolParamSchema = z.union([
   z.lazy(() => functionToolParamSchema),
+  z.lazy(() => customToolParamSchema),
   z.lazy(() => webSearchToolParamSchema),
   z.lazy(() => webSearchToolParam20250826ParamSchema),
   z.lazy(() => webSearchPreviewToolParamSchema),

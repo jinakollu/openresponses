@@ -3,6 +3,8 @@
  * Do not edit manually.
  */
 
+import { customToolCallItemParamSchema } from "./customToolCallItemParamSchema.ts";
+import { customToolCallOutputItemParamSchema } from "./customToolCallOutputItemParamSchema.ts";
 import { functionCallItemParamSchema } from "./functionCallItemParamSchema.ts";
 import { functionCallOutputItemParamSchema } from "./functionCallOutputItemParamSchema.ts";
 import { imageGenCallItemParamSchema } from "./imageGenCallItemParamSchema.ts";
@@ -18,6 +20,8 @@ export const itemParamSchema = z.union([
   z.lazy(() => messageItemParamSchema),
   z.lazy(() => functionCallItemParamSchema),
   z.lazy(() => functionCallOutputItemParamSchema),
+  z.lazy(() => customToolCallItemParamSchema),
+  z.lazy(() => customToolCallOutputItemParamSchema),
   z.lazy(() => webSearchCallItemParamSchema),
   z.lazy(() => imageGenCallItemParamSchema),
 ]);

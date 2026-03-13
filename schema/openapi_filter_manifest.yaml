@@ -45,6 +45,8 @@ allow:
       - ResponseOutputTextAnnotationAddedStreamingEvent
       - ResponseFunctionCallArgumentsDeltaStreamingEvent
       - ResponseFunctionCallArgumentsDoneStreamingEvent
+      - ResponseCustomToolCallInputDeltaStreamingEvent
+      - ResponseCustomToolCallInputDoneStreamingEvent
       - ResponseWebSearchCallInProgressStreamingEvent
       - ResponseWebSearchCallSearchingStreamingEvent
       - ResponseWebSearchCallCompletedStreamingEvent
@@ -61,6 +63,7 @@ allow:
       - FunctionToolChoice
       - WebSearchToolChoice
       - ImageGenToolChoice
+      - CustomToolChoice
     ResponsesToolParam:
       - FunctionToolParam
       - WebSearchToolParam
@@ -68,6 +71,7 @@ allow:
       - WebSearchPreviewToolParam
       - WebSearchPreviewToolParam_2025_03_11Param
       - ImageGenToolParam
+      - CustomToolParam
     ItemField:
       - Message
       - FunctionCall
@@ -75,6 +79,8 @@ allow:
       - ReasoningBody
       - WebSearchCall
       - ImageGenCall
+      - CustomToolCall
+      - CustomToolCallOutput
     ItemParam:
       - ItemReferenceParam
       - ReasoningItemParam
@@ -83,20 +89,25 @@ allow:
       - FunctionCallOutputItemParam
       - WebSearchCallItemParam
       - ImageGenCallItemParam
+      - CustomToolCallItemParam
+      - CustomToolCallOutputItemParam
     Tool:
       - FunctionTool
       - WebSearchTool
       - WebSearchPreviewTool
       - ImageGenTool
+      - CustomTool
     SpecificToolChoiceParam:
       - SpecificFunctionParam
       - SpecificWebSearchParam
       - SpecificWebSearchPreviewParam
       - SpecificImageGenParam
+      - SpecificCustomToolParam
     SpecificToolChoice:
       - FunctionToolChoice
       - WebSearchToolChoice
       - ImageGenToolChoice
+      - CustomToolChoice
     OutputTextContentParam.annotations:
       - UrlCitationParam
     Annotation:
@@ -129,6 +140,10 @@ deny:
     ImageGenCall:
       - created_by
     ImageGenCallItemParam:
+      - created_by
+    CustomToolCall:
+      - created_by
+    CustomToolCallOutput:
       - created_by
 
     CreateResponseBody:

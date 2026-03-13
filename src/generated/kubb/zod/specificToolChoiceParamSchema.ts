@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { specificCustomToolParamSchema } from "./specificCustomToolParamSchema.ts";
 import { specificFunctionParamSchema } from "./specificFunctionParamSchema.ts";
 import { specificImageGenParamSchema } from "./specificImageGenParamSchema.ts";
 import { specificWebSearchParamSchema } from "./specificWebSearchParamSchema.ts";
@@ -14,4 +15,5 @@ export const specificToolChoiceParamSchema = z.union([
   z.lazy(() => specificWebSearchPreviewParamSchema),
   z.lazy(() => specificImageGenParamSchema),
   z.lazy(() => specificFunctionParamSchema),
+  z.lazy(() => specificCustomToolParamSchema),
 ]);

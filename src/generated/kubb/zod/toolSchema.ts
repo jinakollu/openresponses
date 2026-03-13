@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { customToolSchema } from "./customToolSchema.ts";
 import { functionToolSchema } from "./functionToolSchema.ts";
 import { imageGenToolSchema } from "./imageGenToolSchema.ts";
 import { webSearchPreviewToolSchema } from "./webSearchPreviewToolSchema.ts";
@@ -18,5 +19,6 @@ export const toolSchema = z
     z.lazy(() => webSearchToolSchema),
     z.lazy(() => webSearchPreviewToolSchema),
     z.lazy(() => imageGenToolSchema),
+    z.lazy(() => customToolSchema),
   ])
   .describe("A tool that can be used to generate a response.");

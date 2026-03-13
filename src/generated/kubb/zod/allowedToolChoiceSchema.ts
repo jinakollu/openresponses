@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { customToolChoiceSchema } from "./customToolChoiceSchema.ts";
 import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
 import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
 import { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
@@ -16,6 +17,7 @@ export const allowedToolChoiceSchema = z.object({
       z.lazy(() => functionToolChoiceSchema),
       z.lazy(() => webSearchToolChoiceSchema),
       z.lazy(() => imageGenToolChoiceSchema),
+      z.lazy(() => customToolChoiceSchema),
     ]),
   ),
   mode: z.lazy(() => toolChoiceValueEnumSchema),

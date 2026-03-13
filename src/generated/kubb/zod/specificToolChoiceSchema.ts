@@ -3,6 +3,7 @@
  * Do not edit manually.
  */
 
+import { customToolChoiceSchema } from "./customToolChoiceSchema.ts";
 import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
 import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
 import { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
@@ -12,4 +13,5 @@ export const specificToolChoiceSchema = z.union([
   z.lazy(() => functionToolChoiceSchema),
   z.lazy(() => webSearchToolChoiceSchema),
   z.lazy(() => imageGenToolChoiceSchema),
+  z.lazy(() => customToolChoiceSchema),
 ]);

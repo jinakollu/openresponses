@@ -3,6 +3,8 @@
  * Do not edit manually.
  */
 
+import { customToolCallOutputSchema } from "./customToolCallOutputSchema.ts";
+import { customToolCallSchema } from "./customToolCallSchema.ts";
 import { functionCallOutputSchema } from "./functionCallOutputSchema.ts";
 import { functionCallSchema } from "./functionCallSchema.ts";
 import { imageGenCallSchema } from "./imageGenCallSchema.ts";
@@ -22,6 +24,8 @@ export const itemFieldSchema = z
     z.lazy(() => webSearchCallSchema),
     z.lazy(() => imageGenCallSchema),
     z.lazy(() => reasoningBodySchema),
+    z.lazy(() => customToolCallSchema),
+    z.lazy(() => customToolCallOutputSchema),
   ])
   .describe(
     "An item representing a message, tool call, tool output, reasoning, or other response element.",
