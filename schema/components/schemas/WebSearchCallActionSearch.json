@@ -21,6 +21,31 @@
         "type": "string"
       },
       "type": "array"
+    },
+    "sources": {
+      "anyOf": [
+        {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "./UrlSourceParam.json"
+              },
+              {
+                "$ref": "./ApiSourceParam.json"
+              }
+            ],
+            "description": "A source referenced by a web search tool call.",
+            "discriminator": {
+              "propertyName": "type"
+            }
+          },
+          "type": "array",
+          "description": "Sources used for the search."
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   },
   "type": "object",
