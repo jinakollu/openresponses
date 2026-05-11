@@ -6,7 +6,6 @@
 import { z } from "zod";
 
 export const includeEnumSchema = z.enum([
-  "web_search_call.results",
   "web_search_call.action.sources",
   "reasoning.encrypted_content",
   "message.output_text.logprobs",

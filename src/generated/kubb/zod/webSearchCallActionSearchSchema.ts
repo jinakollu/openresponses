@@ -3,10 +3,25 @@
  * Do not edit manually.
  */
 
+import { apiSourceParamSchema } from "./apiSourceParamSchema.ts";
+import { urlSourceParamSchema } from "./urlSourceParamSchema.ts";
 import { z } from "zod";
 
 export const webSearchCallActionSearchSchema = z.object({
   type: z.enum(["search"]).default("search"),
   query: z.optional(z.union([z.string(), z.null()])),
   queries: z.optional(z.array(z.string())),
+  sources: z.optional(
+    z.union([
+      z.array(
+        z
+          .union([
+            z.lazy(() => urlSourceParamSchema),
+            z.lazy(() => apiSourceParamSchema),
+          ])
+          .describe("A source referenced by a web search tool call."),
+      ),
+      z.null(),
+    ]),
+  ),
 });

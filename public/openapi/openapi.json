@@ -1283,7 +1283,6 @@
       "IncludeEnum": {
         "type": "string",
         "enum": [
-          "web_search_call.results",
           "web_search_call.action.sources",
           "reasoning.encrypted_content",
           "message.output_text.logprobs"
@@ -2950,6 +2949,31 @@
               "type": "string"
             },
             "type": "array"
+          },
+          "sources": {
+            "anyOf": [
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/UrlSourceParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ApiSourceParam"
+                    }
+                  ],
+                  "description": "A source referenced by a web search tool call.",
+                  "discriminator": {
+                    "propertyName": "type"
+                  }
+                },
+                "type": "array",
+                "description": "Sources used for the search."
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
