@@ -3,7 +3,7 @@
     "type": {
       "type": "string",
       "enum": ["web_search_preview"],
-      "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.",
+      "description": "The type of the web search tool. Always `web_search_preview`.",
       "default": "web_search_preview",
       "x-stainless-const": true
     },

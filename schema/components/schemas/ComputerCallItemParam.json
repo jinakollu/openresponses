@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of the computer call.",
-          "example": "cu_123"
+          "examples": ["cu_123"]
         },
         {
           "type": "null"

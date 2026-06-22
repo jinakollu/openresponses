@@ -3,7 +3,7 @@
     "id": {
       "type": "string",
       "description": "The unique ID of this code interpreter tool call.",
-      "example": "ci_123"
+      "examples": ["ci_123"]
     },
     "type": {
       "type": "string",

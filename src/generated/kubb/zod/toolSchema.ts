@@ -3,12 +3,22 @@
  * Do not edit manually.
  */
 
+import { customToolSchema } from "./customToolSchema.ts";
 import { functionToolSchema } from "./functionToolSchema.ts";
+import { imageGenToolSchema } from "./imageGenToolSchema.ts";
+import { webSearchPreviewToolSchema } from "./webSearchPreviewToolSchema.ts";
+import { webSearchToolSchema } from "./webSearchToolSchema.ts";
 import { z } from "zod";
 
 /**
  * @description A tool that can be used to generate a response.
  */
 export const toolSchema = z
-  .lazy(() => functionToolSchema)
+  .union([
+    z.lazy(() => functionToolSchema),
+    z.lazy(() => webSearchToolSchema),
+    z.lazy(() => webSearchPreviewToolSchema),
+    z.lazy(() => imageGenToolSchema),
+    z.lazy(() => customToolSchema),
+  ])
   .describe("A tool that can be used to generate a response.");

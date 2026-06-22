@@ -17,14 +17,14 @@ export const jsonSchemaResponseFormatParamSchema = z.object({
     z
       .string()
       .describe(
-        "A description of what the response format is for, used by the model to\ndetermine how to respond in the format.\n",
+        "A description of what the response format is for, used by the model to determine how to respond in the format. ",
       ),
   ),
   name: z.optional(
     z
       .string()
       .describe(
-        "The name of the response format. Must be a-z, A-Z, 0-9, or contain\nunderscores and dashes, with a maximum length of 64.\n",
+        "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. ",
       ),
   ),
   schema: z.optional(
@@ -32,7 +32,7 @@ export const jsonSchemaResponseFormatParamSchema = z.object({
       .object({})
       .catchall(z.any())
       .describe(
-        "The schema for the response format, described as a JSON Schema object.\n",
+        "The schema for the response format, described as a JSON Schema object. ",
       ),
   ),
   strict: z.optional(z.union([z.boolean(), z.null()])),

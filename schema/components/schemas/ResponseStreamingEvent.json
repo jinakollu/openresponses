@@ -1,0 +1,181 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./ResponseCreatedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseQueuedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFailedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseIncompleteStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseOutputItemAddedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseOutputItemDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningSummaryPartAddedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningSummaryPartDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseContentPartAddedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseContentPartDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseOutputTextDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseOutputTextDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseRefusalDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseRefusalDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningSummaryDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseReasoningSummaryDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseOutputTextAnnotationAddedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFunctionCallArgumentsDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFunctionCallArgumentsDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCustomToolCallInputDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCustomToolCallInputDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseShellCallCommandAddedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseShellCallCommandDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseShellCallCommandDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFileSearchCallInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFileSearchCallSearchingStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseFileSearchCallCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseWebSearchCallInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseWebSearchCallSearchingStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseWebSearchCallCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCodeInterpreterCallInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCodeInterpreterCallInterpretingStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCodeInterpreterCallCodeDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCodeInterpreterCallCodeDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseCodeInterpreterCallCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseApplyPatchCallOperationDiffDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseApplyPatchCallOperationDiffDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseImageGenCallInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseImageGenCallGeneratingStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseImageGenCallPartialImageStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseImageGenCallCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPListToolsInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPListToolsFailedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPListToolsCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPCallInProgressStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPCallFailedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPCallCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPCallArgumentsDeltaStreamingEvent.json"
+    },
+    {
+      "$ref": "./ResponseMCPCallArgumentsDoneStreamingEvent.json"
+    },
+    {
+      "$ref": "./ImageGenerationPartialImageStreamingEvent.json"
+    },
+    {
+      "$ref": "./ImageGenerationCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ImageEditPartialImageStreamingEvent.json"
+    },
+    {
+      "$ref": "./ImageEditCompletedStreamingEvent.json"
+    },
+    {
+      "$ref": "./ErrorStreamingEvent.json"
+    }
+  ],
+  "discriminator": {
+    "propertyName": "type"
+  }
+}

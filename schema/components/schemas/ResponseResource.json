@@ -117,51 +117,7 @@
       "description": "The tools that were available to the model during response generation."
     },
     "tool_choice": {
-      "oneOf": [
-        {
-          "oneOf": [
-            {
-              "$ref": "./CodeInterpreterToolChoice.json"
-            },
-            {
-              "$ref": "./FunctionToolChoice.json"
-            },
-            {
-              "$ref": "./MCPToolChoice.json"
-            },
-            {
-              "$ref": "./FileSearchToolChoice.json"
-            },
-            {
-              "$ref": "./WebSearchToolChoice.json"
-            },
-            {
-              "$ref": "./ImageGenToolChoice.json"
-            },
-            {
-              "$ref": "./ComputerToolChoice.json"
-            },
-            {
-              "$ref": "./LocalShellToolChoice.json"
-            },
-            {
-              "$ref": "./FunctionShellToolChoice.json"
-            },
-            {
-              "$ref": "./ApplyPatchToolChoice.json"
-            },
-            {
-              "$ref": "./CustomToolChoice.json"
-            }
-          ]
-        },
-        {
-          "$ref": "./ToolChoiceValueEnum.json"
-        },
-        {
-          "$ref": "./AllowedToolChoice.json"
-        }
-      ]
+      "$ref": "./ToolChoice.json"
     },
     "truncation": {
       "$ref": "./TruncationEnum.json",
@@ -362,56 +318,58 @@
   ],
   "title": "The response object",
   "description": "The complete response object that was returned by the Responses API.",
-  "example": {
-    "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
-    "object": "response",
-    "created_at": 1741476777,
-    "status": "completed",
-    "completed_at": 1741476778,
-    "model": "gpt-4o-2024-08-06",
-    "output": [
-      {
-        "type": "message",
-        "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
-        "status": "completed",
-        "role": "assistant",
-        "content": [
-          {
-            "type": "output_text",
-            "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
-            "annotations": []
-          }
-        ]
-      }
-    ],
-    "parallel_tool_calls": true,
-    "reasoning": {},
-    "store": true,
-    "background": false,
-    "temperature": 1,
-    "presence_penalty": 0,
-    "frequency_penalty": 0,
-    "text": {
-      "format": {
-        "type": "text"
-      }
-    },
-    "tool_choice": "auto",
-    "tools": [],
-    "top_p": 1,
-    "truncation": "disabled",
-    "usage": {
-      "input_tokens": 328,
-      "input_tokens_details": {
-        "cached_tokens": 0
+  "examples": [
+    {
+      "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
+      "object": "response",
+      "created_at": 1741476777,
+      "status": "completed",
+      "completed_at": 1741476778,
+      "model": "gpt-4o-2024-08-06",
+      "output": [
+        {
+          "type": "message",
+          "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
+              "annotations": []
+            }
+          ]
+        }
+      ],
+      "parallel_tool_calls": true,
+      "reasoning": {},
+      "store": true,
+      "background": false,
+      "temperature": 1,
+      "presence_penalty": 0,
+      "frequency_penalty": 0,
+      "text": {
+        "format": {
+          "type": "text"
+        }
       },
-      "output_tokens": 52,
-      "output_tokens_details": {
-        "reasoning_tokens": 0
+      "tool_choice": "auto",
+      "tools": [],
+      "top_p": 1,
+      "truncation": "disabled",
+      "usage": {
+        "input_tokens": 328,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 380
       },
-      "total_tokens": 380
-    },
-    "metadata": {}
-  },
+      "metadata": {}
+    }
+  ],
   "x-openai-class-name": "responsesapi.api.resources.response_resource.ResponseBody"
 }

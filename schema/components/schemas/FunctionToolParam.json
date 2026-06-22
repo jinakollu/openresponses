@@ -19,7 +19,8 @@
     "parameters": {
       "anyOf": [
         {
-          "$ref": "./EmptyModelParam.json"
+          "additionalProperties": {},
+          "type": "object"
         },
         {
           "type": "null"

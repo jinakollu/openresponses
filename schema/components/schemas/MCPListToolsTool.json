@@ -16,7 +16,10 @@
     "input_schema": {},
     "annotations": {
       "anyOf": [
-        {},
+        {
+          "type": "object",
+          "additionalProperties": {}
+        },
         {
           "type": "null"
         }

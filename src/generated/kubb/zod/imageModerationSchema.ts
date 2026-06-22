@@ -5,4 +5,4 @@
 
 import { z } from "zod";
 
-export const emptyModelParamSchema = z.object({});
+export const imageModerationSchema = z.enum(["auto", "low"]);

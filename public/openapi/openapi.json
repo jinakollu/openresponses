@@ -84,7 +84,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this reasoning item.",
-                "example": "rs_123"
+                "examples": ["rs_123"]
               },
               {
                 "type": "null"
@@ -133,6 +133,155 @@
         "type": "object",
         "required": ["type", "summary"]
       },
+      "UrlCitationParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["url_citation"],
+            "description": "The citation type. Always `url_citation`.",
+            "default": "url_citation"
+          },
+          "start_index": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The index of the first character of the citation in the message."
+          },
+          "end_index": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The index of the last character of the citation in the message."
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the cited resource."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the cited resource."
+          }
+        },
+        "type": "object",
+        "required": ["type", "start_index", "end_index", "url", "title"]
+      },
+      "OutputTextContentParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["output_text"],
+            "description": "The content type. Always `output_text`.",
+            "default": "output_text"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The text content."
+          },
+          "annotations": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/UrlCitationParam"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type"
+              }
+            },
+            "type": "array",
+            "description": "Citations associated with the text content."
+          }
+        },
+        "type": "object",
+        "required": ["type", "text"]
+      },
+      "RefusalContentParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["refusal"],
+            "description": "The content type. Always `refusal`.",
+            "default": "refusal"
+          },
+          "refusal": {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The refusal text."
+          }
+        },
+        "type": "object",
+        "required": ["type", "refusal"]
+      },
+      "AssistantMessageItemParamContent": {
+        "oneOf": [
+          {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/OutputTextContentParam"
+                },
+                {
+                  "$ref": "#/components/schemas/RefusalContentParam"
+                }
+              ],
+              "description": "A piece of assistant message content, such as text or a refusal.",
+              "discriminator": {
+                "propertyName": "type"
+              }
+            },
+            "type": "array"
+          },
+          {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The message content, as a single string."
+          }
+        ],
+        "description": "The message content, as an array of content parts."
+      },
+      "AssistantMessageItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this message item.",
+                "examples": ["msg_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["assistant"],
+            "description": "The role of the message author. Always `assistant`.",
+            "default": "assistant"
+          },
+          "content": {
+            "$ref": "#/components/schemas/AssistantMessageItemParamContent"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The status of the message item."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["role", "content"]
+      },
       "InputTextContentParam": {
         "properties": {
           "type": {
@@ -153,6 +302,126 @@
         "description": "A text input to the model.",
         "x-unionDisplay": "section",
         "x-unionTitle": "Content Type"
+      },
+      "DeveloperMessageItemParamContent": {
+        "oneOf": [
+          {
+            "items": {
+              "$ref": "#/components/schemas/InputTextContentParam"
+            },
+            "type": "array"
+          },
+          {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The message content, as a single string."
+          }
+        ],
+        "description": "The message content, as an array of content parts."
+      },
+      "DeveloperMessageItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this message item.",
+                "examples": ["msg_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["developer"],
+            "description": "The message role. Always `developer`.",
+            "default": "developer"
+          },
+          "content": {
+            "$ref": "#/components/schemas/DeveloperMessageItemParamContent"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The status of the message item."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["role", "content"]
+      },
+      "SystemMessageItemParamContent": {
+        "oneOf": [
+          {
+            "items": {
+              "$ref": "#/components/schemas/InputTextContentParam"
+            },
+            "type": "array"
+          },
+          {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The message content, as a single string."
+          }
+        ],
+        "description": "The message content, as an array of content parts."
+      },
+      "SystemMessageItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this message item.",
+                "examples": ["msg_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["message"],
+            "description": "The item type. Always `message`.",
+            "default": "message"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["system"],
+            "description": "The message role. Always `system`.",
+            "default": "system"
+          },
+          "content": {
+            "$ref": "#/components/schemas/SystemMessageItemParamContent"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The status of the message item."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["role", "content"]
       },
       "DetailEnum": {
         "type": "string",
@@ -254,6 +523,39 @@
         "title": "Input file",
         "description": "A file input to the model."
       },
+      "InputContentParam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/InputTextContentParam"
+          },
+          {
+            "$ref": "#/components/schemas/InputImageContentParamAutoParam"
+          },
+          {
+            "$ref": "#/components/schemas/InputFileContentParam"
+          }
+        ],
+        "description": "A piece of message content, such as text, an image, or a file.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "UserMessageItemParamContent": {
+        "oneOf": [
+          {
+            "items": {
+              "$ref": "#/components/schemas/InputContentParam"
+            },
+            "type": "array"
+          },
+          {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The message content, as a single string."
+          }
+        ],
+        "description": "The message content, as an array of content parts."
+      },
       "UserMessageItemParam": {
         "properties": {
           "id": {
@@ -261,7 +563,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this message item.",
-                "example": "msg_123"
+                "examples": ["msg_123"]
               },
               {
                 "type": "null"
@@ -281,34 +583,7 @@
             "default": "user"
           },
           "content": {
-            "oneOf": [
-              {
-                "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/InputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputImageContentParamAutoParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputFileContentParam"
-                    }
-                  ],
-                  "description": "A piece of message content, such as text, an image, or a file.",
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
-                },
-                "type": "array"
-              },
-              {
-                "type": "string",
-                "maxLength": 10485760,
-                "description": "The message content, as a single string."
-              }
-            ],
-            "description": "The message content, as an array of content parts."
+            "$ref": "#/components/schemas/UserMessageItemParamContent"
           },
           "status": {
             "anyOf": [
@@ -323,278 +598,26 @@
           }
         },
         "type": "object",
-        "required": ["type", "role", "content"]
+        "required": ["role", "content"]
       },
-      "SystemMessageItemParam": {
-        "properties": {
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The unique ID of this message item.",
-                "example": "msg_123"
-              },
-              {
-                "type": "null"
-              }
-            ]
+      "MessageItemParam": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AssistantMessageItemParam"
           },
-          "type": {
-            "type": "string",
-            "enum": ["message"],
-            "description": "The item type. Always `message`.",
-            "default": "message"
+          {
+            "$ref": "#/components/schemas/DeveloperMessageItemParam"
           },
-          "role": {
-            "type": "string",
-            "enum": ["system"],
-            "description": "The message role. Always `system`.",
-            "default": "system"
+          {
+            "$ref": "#/components/schemas/SystemMessageItemParam"
           },
-          "content": {
-            "oneOf": [
-              {
-                "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/InputTextContentParam"
-                    }
-                  ],
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
-                },
-                "type": "array"
-              },
-              {
-                "type": "string",
-                "maxLength": 10485760,
-                "description": "The message content, as a single string."
-              }
-            ],
-            "description": "The message content, as an array of content parts."
-          },
-          "status": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The status of the message item."
-              },
-              {
-                "type": "null"
-              }
-            ]
+          {
+            "$ref": "#/components/schemas/UserMessageItemParam"
           }
-        },
-        "type": "object",
-        "required": ["type", "role", "content"]
-      },
-      "DeveloperMessageItemParam": {
-        "properties": {
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The unique ID of this message item.",
-                "example": "msg_123"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "type": {
-            "type": "string",
-            "enum": ["message"],
-            "description": "The item type. Always `message`.",
-            "default": "message"
-          },
-          "role": {
-            "type": "string",
-            "enum": ["developer"],
-            "description": "The message role. Always `developer`.",
-            "default": "developer"
-          },
-          "content": {
-            "oneOf": [
-              {
-                "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/InputTextContentParam"
-                    }
-                  ],
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
-                },
-                "type": "array"
-              },
-              {
-                "type": "string",
-                "maxLength": 10485760,
-                "description": "The message content, as a single string."
-              }
-            ],
-            "description": "The message content, as an array of content parts."
-          },
-          "status": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The status of the message item."
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": ["type", "role", "content"]
-      },
-      "UrlCitationParam": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": ["url_citation"],
-            "description": "The citation type. Always `url_citation`.",
-            "default": "url_citation"
-          },
-          "start_index": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "The index of the first character of the citation in the message."
-          },
-          "end_index": {
-            "type": "integer",
-            "minimum": 0,
-            "description": "The index of the last character of the citation in the message."
-          },
-          "url": {
-            "type": "string",
-            "description": "The URL of the cited resource."
-          },
-          "title": {
-            "type": "string",
-            "description": "The title of the cited resource."
-          }
-        },
-        "type": "object",
-        "required": ["type", "start_index", "end_index", "url", "title"]
-      },
-      "OutputTextContentParam": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": ["output_text"],
-            "description": "The content type. Always `output_text`.",
-            "default": "output_text"
-          },
-          "text": {
-            "type": "string",
-            "maxLength": 10485760,
-            "description": "The text content."
-          },
-          "annotations": {
-            "oneOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/UrlCitationParam"
-                },
-                "type": "array"
-              }
-            ],
-            "description": "Citations associated with the text content."
-          }
-        },
-        "type": "object",
-        "required": ["type", "text"]
-      },
-      "RefusalContentParam": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": ["refusal"],
-            "description": "The content type. Always `refusal`.",
-            "default": "refusal"
-          },
-          "refusal": {
-            "type": "string",
-            "maxLength": 10485760,
-            "description": "The refusal text."
-          }
-        },
-        "type": "object",
-        "required": ["type", "refusal"]
-      },
-      "AssistantMessageItemParam": {
-        "properties": {
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The unique ID of this message item.",
-                "example": "msg_123"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "type": {
-            "type": "string",
-            "enum": ["message"],
-            "description": "The item type. Always `message`.",
-            "default": "message"
-          },
-          "role": {
-            "type": "string",
-            "enum": ["assistant"],
-            "description": "The role of the message author. Always `assistant`.",
-            "default": "assistant"
-          },
-          "content": {
-            "oneOf": [
-              {
-                "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/OutputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/RefusalContentParam"
-                    }
-                  ],
-                  "description": "A piece of assistant message content, such as text or a refusal.",
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
-                },
-                "type": "array"
-              },
-              {
-                "type": "string",
-                "maxLength": 10485760,
-                "description": "The message content, as a single string."
-              }
-            ],
-            "description": "The message content, as an array of content parts."
-          },
-          "status": {
-            "anyOf": [
-              {
-                "type": "string",
-                "description": "The status of the message item."
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": ["type", "role", "content"]
+        ],
+        "discriminator": {
+          "propertyName": "role"
+        }
       },
       "FunctionCallItemStatus": {
         "type": "string",
@@ -607,7 +630,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of this function tool call.",
-                "example": "fc_123"
+                "examples": ["fc_123"]
               },
               {
                 "type": "null"
@@ -665,7 +688,7 @@
               {
                 "type": "string",
                 "description": "The unique ID of the function tool call output. Populated when this item is returned via API.",
-                "example": "fc_123"
+                "examples": ["fc_123"]
               },
               {
                 "type": "null"
@@ -693,24 +716,7 @@
               },
               {
                 "items": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/InputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputImageContentParamAutoParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputFileContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/InputVideoContent"
-                    }
-                  ],
-                  "description": "A piece of message content, such as text, an image, or a file.",
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
+                  "$ref": "#/components/schemas/InputContentParam"
                 },
                 "type": "array",
                 "description": "An array of content outputs (text, image, file) for the function tool call."
@@ -741,6 +747,503 @@
         "title": "Function tool call output",
         "description": "The output of a function tool call."
       },
+      "CustomToolCallItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this custom tool call.",
+                "examples": ["ctc_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "call_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "description": "The unique ID of the custom tool call generated by the model."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custom_tool_call"],
+            "description": "The item type. Always `custom_tool_call`.",
+            "default": "custom_tool_call"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The name of the custom tool to call."
+          },
+          "input": {
+            "type": "string",
+            "description": "The input to the custom tool call."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/FunctionCallItemStatus"
+                  },
+                  {
+                    "description": "The status of the custom tool call."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["call_id", "type", "name", "input"]
+      },
+      "CustomToolCallOutputItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this custom tool call output.",
+                "examples": ["ctco_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "call_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "description": "The unique ID of the custom tool call generated by the model."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custom_tool_call_output"],
+            "description": "The item type. Always `custom_tool_call_output`.",
+            "default": "custom_tool_call_output"
+          },
+          "output": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 10485760,
+                "description": "A JSON string of the output of the custom tool call."
+              },
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/InputTextContentParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InputImageContentParamAutoParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InputFileContentParam"
+                    }
+                  ],
+                  "description": "A piece of message content, such as text, an image, or a file.",
+                  "discriminator": {
+                    "propertyName": "type"
+                  }
+                },
+                "type": "array",
+                "description": "An array of content outputs (text, image, file) for the custom tool call."
+              }
+            ],
+            "description": "Text, image, or file output of the custom tool call."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/FunctionCallItemStatus"
+                  },
+                  {
+                    "description": "The status of the custom tool call output item."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["call_id", "type", "output"]
+      },
+      "UrlSourceParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["url"],
+            "description": "The source type. Always `url`.",
+            "default": "url"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL source."
+          }
+        },
+        "type": "object",
+        "required": ["type", "url"]
+      },
+      "ApiSourceParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["api"],
+            "description": "The source type. Always `api`.",
+            "default": "api"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the API source."
+          }
+        },
+        "type": "object",
+        "required": ["type", "name"]
+      },
+      "WebSearchCallActionSearchParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["search"],
+            "description": "The action type. Always `search`.",
+            "default": "search"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The query string used for web search."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "queries": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description": "The list of queries issued as part of this web search call."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "anyOf": [
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/UrlSourceParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ApiSourceParam"
+                    }
+                  ],
+                  "description": "A source referenced by a web search tool call.",
+                  "discriminator": {
+                    "propertyName": "type"
+                  }
+                },
+                "type": "array",
+                "description": "Sources used for the search."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCallActionOpenPageParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["open_page"],
+            "description": "The action type. Always `open_page`.",
+            "default": "open_page"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The URL of the page to open."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCallActionFindInPageParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["find_in_page"],
+            "description": "The action type. Always `find_in_page`.",
+            "default": "find_in_page"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The URL of the page to search within."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pattern": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The pattern to search for within the page."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCallItemParam": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The unique ID of this web search tool call.",
+                "examples": ["ws_123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web_search_call"],
+            "description": "The item type. Always `web_search_call`.",
+            "default": "web_search_call"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The status of the web search tool call."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "action": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/WebSearchCallActionSearchParam"
+                  },
+                  {
+                    "$ref": "#/components/schemas/WebSearchCallActionOpenPageParam"
+                  },
+                  {
+                    "$ref": "#/components/schemas/WebSearchCallActionFindInPageParam"
+                  }
+                ],
+                "description": "The web search action performed by the tool.",
+                "discriminator": {
+                  "propertyName": "type"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "ImageGenCallStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "completed",
+          "incomplete",
+          "generating",
+          "failed"
+        ]
+      },
+      "ImageSize": {
+        "type": "string",
+        "enum": ["1024x1024", "1024x1536", "1536x1024", "auto"]
+      },
+      "ImageBackground": {
+        "type": "string",
+        "enum": ["transparent", "opaque", "auto"]
+      },
+      "ImageQuality": {
+        "type": "string",
+        "enum": ["low", "medium", "high", "auto"]
+      },
+      "ImageOutputFormat": {
+        "type": "string",
+        "enum": ["png", "webp", "jpeg"]
+      },
+      "ImageGenCallItemParam": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the image generation call.",
+            "examples": ["ig_123"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["image_generation_call"],
+            "description": "The type of the image generation call. Always `image_generation_call`.",
+            "default": "image_generation_call"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageGenCallStatus"
+                  },
+                  {
+                    "description": "The status of the image generation call."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revised_prompt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The prompt that was used after any model prompt rewriting."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "result": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 33554432,
+                "description": "The generated image encoded in base64."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "size": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageSize"
+                  },
+                  {
+                    "description": "The image size used for generation."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "background": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageBackground"
+                  },
+                  {
+                    "description": "The background setting used for generation."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageQuality"
+                  },
+                  {
+                    "description": "The quality setting used for generation."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output_format": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageOutputFormat"
+                  },
+                  {
+                    "description": "The output format used for generation."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["id", "type"]
+      },
       "ItemParam": {
         "oneOf": [
           {
@@ -750,22 +1253,25 @@
             "$ref": "#/components/schemas/ReasoningItemParam"
           },
           {
-            "$ref": "#/components/schemas/UserMessageItemParam"
-          },
-          {
-            "$ref": "#/components/schemas/SystemMessageItemParam"
-          },
-          {
-            "$ref": "#/components/schemas/DeveloperMessageItemParam"
-          },
-          {
-            "$ref": "#/components/schemas/AssistantMessageItemParam"
+            "$ref": "#/components/schemas/MessageItemParam"
           },
           {
             "$ref": "#/components/schemas/FunctionCallItemParam"
           },
           {
             "$ref": "#/components/schemas/FunctionCallOutputItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolCallItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolCallOutputItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchCallItemParam"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenCallItemParam"
           }
         ],
         "discriminator": {
@@ -776,17 +1282,16 @@
       },
       "IncludeEnum": {
         "type": "string",
-        "enum": ["reasoning.encrypted_content", "message.output_text.logprobs"],
+        "enum": [
+          "web_search_call.action.sources",
+          "reasoning.encrypted_content",
+          "message.output_text.logprobs"
+        ],
         "description": "",
         "x-enumDescriptions": {
           "message.output_text.logprobs": "includes sampled logprobs in assistant messages.",
           "reasoning.encrypted_content": "includes encrypted reasoning content so that it may be rehydrated on a subsequent request."
         }
-      },
-      "EmptyModelParam": {
-        "properties": {},
-        "type": "object",
-        "required": []
       },
       "FunctionToolParam": {
         "properties": {
@@ -809,7 +1314,8 @@
           "parameters": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/EmptyModelParam"
+                "additionalProperties": {},
+                "type": "object"
               },
               {
                 "type": "null"
@@ -828,10 +1334,495 @@
         "type": "object",
         "required": ["name", "type"]
       },
+      "CustomTextFormatParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["text"],
+            "description": "Unconstrained text format. Always `text`.",
+            "default": "text"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "Text format",
+        "description": "Unconstrained free-form text."
+      },
+      "GrammarSyntax": {
+        "type": "string",
+        "enum": ["lark", "regex"]
+      },
+      "CustomGrammarFormatParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["grammar"],
+            "description": "Grammar format. Always `grammar`.",
+            "default": "grammar"
+          },
+          "syntax": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrammarSyntax"
+              },
+              {
+                "description": "The syntax of the grammar definition. One of `lark` or `regex`."
+              }
+            ]
+          },
+          "definition": {
+            "type": "string",
+            "description": "The grammar definition."
+          }
+        },
+        "type": "object",
+        "required": ["type", "syntax", "definition"],
+        "title": "Grammar format",
+        "description": "A grammar defined by the user."
+      },
+      "CustomToolParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom"],
+            "description": "The type of the custom tool. Always `custom`.",
+            "default": "custom"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool, used to identify it in tool calls."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the custom tool, used to provide more context."
+          },
+          "format": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomTextFormatParam"
+              },
+              {
+                "$ref": "#/components/schemas/CustomGrammarFormatParam"
+              }
+            ],
+            "description": "The input format for the custom tool. Default is unconstrained text.",
+            "discriminator": {
+              "propertyName": "type"
+            }
+          }
+        },
+        "type": "object",
+        "required": ["type", "name"],
+        "title": "Custom tool",
+        "description": "A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)"
+      },
+      "ApproximateLocationParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["approximate"],
+            "description": "The location type. Always `approximate`.",
+            "default": "approximate"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The country for the approximate user location."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The region or state for the approximate user location."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The city for the approximate user location."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The IANA time zone name for the approximate user location."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "description": "An approximate user location to bias web search results."
+      },
+      "SearchContextSize": {
+        "type": "string",
+        "enum": ["low", "medium", "high"]
+      },
+      "SearchFiltersParam": {
+        "type": "object",
+        "properties": {
+          "allowed_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed domains for the search. If not provided, all domains are allowed. Subdomains of the provided domains are allowed as well."
+          }
+        }
+      },
+      "WebSearchToolParam": {
+        "properties": {
+          "user_location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApproximateLocationParam"
+              },
+              {
+                "description": "An approximate user location to bias web search results."
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "How much context to retrieve and include from web search results."
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web_search"],
+            "description": "The type of the tool. Always `web_search`.",
+            "default": "web_search"
+          },
+          "external_web_access": {
+            "type": "boolean",
+            "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchFiltersParam"
+              },
+              {
+                "description": "Filters for the search."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchToolParam_2025_08_26Param": {
+        "properties": {
+          "user_location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApproximateLocationParam"
+              },
+              {
+                "description": "An approximate user location to bias web search results."
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "How much context to retrieve and include from web search results."
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web_search_2025_08_26"],
+            "description": "The type of the tool. Always `web_search_2025_08_26`.",
+            "default": "web_search_2025_08_26"
+          },
+          "external_web_access": {
+            "type": "boolean",
+            "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+          },
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchFiltersParam"
+              },
+              {
+                "description": "Filters for the search."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchPreviewToolParam": {
+        "properties": {
+          "user_location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApproximateLocationParam"
+              },
+              {
+                "description": "An approximate user location to bias web search results."
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "How much context to retrieve and include from web search results."
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web_search_preview"],
+            "description": "The type of the tool. Always `web_search_preview`.",
+            "default": "web_search_preview"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchPreviewToolParam_2025_03_11Param": {
+        "properties": {
+          "user_location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApproximateLocationParam"
+              },
+              {
+                "description": "An approximate user location to bias web search results."
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "How much context to retrieve and include from web search results."
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["web_search_preview_2025_03_11"],
+            "description": "The type of the tool. Always `web_search_preview_2025_03_11`.",
+            "default": "web_search_preview_2025_03_11"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "ImageGenToolModel": {
+        "type": "string",
+        "enum": ["gpt-image-1", "gpt-image-1-mini", "gpt-image-1.5"],
+        "default": "gpt-image-1"
+      },
+      "InputFidelity": {
+        "type": "string",
+        "enum": ["high", "low"],
+        "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. This parameter is only supported for `gpt-image-1`. Unsupported for `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`."
+      },
+      "ImageModeration": {
+        "type": "string",
+        "enum": ["auto", "low"]
+      },
+      "InputImageMaskContentParam": {
+        "properties": {
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20971520,
+                "description": "An image mask to apply when editing, specified as an image URL."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "file_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "An uploaded file ID for an image mask to apply when editing.",
+                "examples": ["file-123"]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [],
+        "description": "An optional mask image to apply when editing."
+      },
+      "ImageGenActionEnum": {
+        "type": "string",
+        "enum": ["generate", "edit", "auto"]
+      },
+      "ImageGenToolParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation"],
+            "description": "The type of the tool. Always `image_generation`.",
+            "default": "image_generation"
+          },
+          "model": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGenToolModel"
+              },
+              {
+                "description": "The image model to use for image generation."
+              }
+            ]
+          },
+          "quality": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageQuality"
+              },
+              {
+                "description": "The quality setting for generated images."
+              }
+            ]
+          },
+          "input_fidelity": {
+            "$ref": "#/components/schemas/InputFidelity"
+          },
+          "size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageSize"
+              },
+              {
+                "description": "The size of the generated image."
+              }
+            ]
+          },
+          "output_format": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageOutputFormat"
+              },
+              {
+                "description": "The output image file format."
+              }
+            ]
+          },
+          "output_compression": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 0,
+            "description": "Compression level for lossy output formats."
+          },
+          "moderation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageModeration"
+              },
+              {
+                "description": "The moderation setting to apply to image generation."
+              }
+            ]
+          },
+          "background": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageBackground"
+              },
+              {
+                "description": "The background setting for image generation."
+              }
+            ]
+          },
+          "input_image_mask": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputImageMaskContentParam"
+              },
+              {
+                "description": "An optional mask image to apply when editing."
+              }
+            ]
+          },
+          "partial_images": {
+            "type": "integer",
+            "maximum": 3,
+            "minimum": 0,
+            "description": "The number of partial images to generate in streaming mode."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGenActionEnum"
+              },
+              {
+                "description": "Whether to generate a new image or edit an existing image."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
       "ResponsesToolParam": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/FunctionToolParam"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolParam"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchToolParam"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchToolParam_2025_08_26Param"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchPreviewToolParam"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchPreviewToolParam_2025_03_11Param"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenToolParam"
           }
         ],
         "discriminator": {
@@ -839,6 +1830,42 @@
         },
         "x-unionDisplay": "section",
         "x-unionTitle": "Tool Types"
+      },
+      "SpecificWebSearchParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search"],
+            "description": "The tool to call. Always `web_search`.",
+            "default": "web_search"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "SpecificWebSearchPreviewParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search_preview"],
+            "description": "The tool to call. Always `web_search_preview`.",
+            "default": "web_search_preview"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "SpecificImageGenParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation"],
+            "description": "The tool to call. Always `image_generation`.",
+            "default": "image_generation"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
       },
       "SpecificFunctionParam": {
         "properties": {
@@ -856,12 +1883,43 @@
         "type": "object",
         "required": ["type", "name"]
       },
+      "SpecificCustomToolParam": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom"],
+            "description": "The tool to call. Always `custom`.",
+            "default": "custom"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool to call."
+          }
+        },
+        "type": "object",
+        "required": ["type", "name"]
+      },
       "SpecificToolChoiceParam": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SpecificWebSearchParam"
+          },
+          {
+            "$ref": "#/components/schemas/SpecificWebSearchPreviewParam"
+          },
+          {
+            "$ref": "#/components/schemas/SpecificImageGenParam"
+          },
+          {
             "$ref": "#/components/schemas/SpecificFunctionParam"
+          },
+          {
+            "$ref": "#/components/schemas/SpecificCustomToolParam"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       },
       "ToolChoiceValueEnum": {
         "type": "string",
@@ -939,7 +1997,7 @@
         "properties": {
           "format": {
             "description": "The format configuration for text output.",
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/TextFormatParam"
               },
@@ -975,7 +2033,7 @@
       },
       "ReasoningEffortEnum": {
         "type": "string",
-        "enum": ["none", "low", "medium", "high", "xhigh"],
+        "enum": ["none", "minimal", "low", "medium", "high", "xhigh"],
         "x-enumDescriptions": {
           "high": "Use a higher reasoning effort to improve answer quality.",
           "medium": "Use a balanced reasoning effort.",
@@ -1091,7 +2149,7 @@
               {
                 "type": "string",
                 "description": "The ID of the response to use as the prior turn for this request.",
-                "example": "resp_123"
+                "examples": ["resp_123"]
               },
               {
                 "type": "null"
@@ -1386,7 +2444,7 @@
           "assistant": "Model-generated content in the conversation.",
           "developer": "Developer-supplied guidance that shapes the assistant\u2019s behavior.",
           "system": "System-level instructions that set global behavior.",
-          "user": "End\u2011user input in the conversation."
+          "user": "End-user input in the conversation."
         }
       },
       "InputTextContent": {
@@ -1728,9 +2786,6 @@
                 },
                 {
                   "$ref": "#/components/schemas/InputFileContent"
-                },
-                {
-                  "$ref": "#/components/schemas/InputVideoContent"
                 }
               ],
               "description": "A content part that makes up an input or output item.",
@@ -1862,6 +2917,207 @@
         "title": "Function call output",
         "description": "A function tool call output that was returned by the tool."
       },
+      "WebSearchCallStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "completed",
+          "incomplete",
+          "searching",
+          "failed"
+        ]
+      },
+      "WebSearchCallActionSearch": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["search"],
+            "default": "search"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "sources": {
+            "anyOf": [
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/UrlSourceParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ApiSourceParam"
+                    }
+                  ],
+                  "description": "A source referenced by a web search tool call.",
+                  "discriminator": {
+                    "propertyName": "type"
+                  }
+                },
+                "type": "array",
+                "description": "Sources used for the search."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCallActionOpenPage": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["open_page"],
+            "default": "open_page"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCallActionFindInPage": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["find_in_page"],
+            "default": "find_in_page"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pattern": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "WebSearchCall": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search_call"],
+            "default": "web_search_call"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/WebSearchCallStatus"
+          },
+          "action": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchCallActionSearch"
+              },
+              {
+                "$ref": "#/components/schemas/WebSearchCallActionOpenPage"
+              },
+              {
+                "$ref": "#/components/schemas/WebSearchCallActionFindInPage"
+              }
+            ],
+            "discriminator": {
+              "propertyName": "type"
+            }
+          }
+        },
+        "type": "object",
+        "required": ["type", "id", "status"]
+      },
+      "ImageGenAction": {
+        "type": "string",
+        "enum": ["generate", "edit", "auto"]
+      },
+      "ImageGenCall": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation_call"],
+            "description": "The type of the image generation call. Always `image_generation_call`.",
+            "default": "image_generation_call"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the image generation call."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageGenCallStatus"
+              },
+              {
+                "description": "The status of the image generation call."
+              }
+            ]
+          },
+          "revised_prompt": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string",
+            "description": "The generated image encoded in base64."
+          },
+          "size": {
+            "$ref": "#/components/schemas/ImageSize"
+          },
+          "background": {
+            "$ref": "#/components/schemas/ImageBackground"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/ImageQuality"
+          },
+          "output_format": {
+            "$ref": "#/components/schemas/ImageOutputFormat"
+          },
+          "action": {
+            "$ref": "#/components/schemas/ImageGenAction"
+          }
+        },
+        "type": "object",
+        "required": ["type", "id", "status"],
+        "title": "Image generation call",
+        "description": "An image generation request made by the model."
+      },
       "ReasoningBody": {
         "properties": {
           "type": {
@@ -1956,6 +3212,122 @@
         "title": "Reasoning item",
         "description": "A reasoning item that was generated by the model."
       },
+      "CustomToolCall": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom_tool_call"],
+            "description": "The type of the item. Always `custom_tool_call`.",
+            "default": "custom_tool_call"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the custom tool call item."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The unique ID of the custom tool call that was generated."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool that was called."
+          },
+          "input": {
+            "type": "string",
+            "description": "The input string that was generated for the tool."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FunctionCallStatus"
+              },
+              {
+                "description": "The status of the custom tool call item that was recorded."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "id", "call_id", "name", "input", "status"],
+        "title": "Custom tool call",
+        "description": "A custom tool call that was generated by the model."
+      },
+      "CustomToolCallOutput": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom_tool_call_output"],
+            "description": "The type of the custom tool call output. Always `custom_tool_call_output`.",
+            "default": "custom_tool_call_output"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call output. Populated when this item is returned via API."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call generated by the model."
+          },
+          "output": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "A JSON string of the output of the custom tool call."
+              },
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/InputTextContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/OutputTextContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TextContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/SummaryTextContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ReasoningTextContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RefusalContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InputImageContent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InputFileContent"
+                    }
+                  ],
+                  "description": "A content part that makes up an input or output item.",
+                  "discriminator": {
+                    "propertyName": "type"
+                  }
+                },
+                "type": "array",
+                "description": "An array of output contents (images, files, text) for the custom tool call."
+              }
+            ]
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FunctionCallOutputStatusEnum"
+              },
+              {
+                "description": "The status of the item. One of `in_progress`, `completed`, or `incomplete`. Populated when items are returned via API."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "id", "call_id", "output", "status"],
+        "title": "Custom tool call output",
+        "description": "A custom tool call output that was returned by the tool."
+      },
       "ItemField": {
         "oneOf": [
           {
@@ -1968,7 +3340,19 @@
             "$ref": "#/components/schemas/FunctionCallOutput"
           },
           {
+            "$ref": "#/components/schemas/WebSearchCall"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenCall"
+          },
+          {
             "$ref": "#/components/schemas/ReasoningBody"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolCall"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolCallOutput"
           }
         ],
         "description": "An item representing a message, tool call, tool output, reasoning, or other response element.",
@@ -1978,6 +3362,10 @@
       },
       "Error": {
         "properties": {
+          "type": {
+            "type": "string",
+            "description": "The error type that was emitted."
+          },
           "code": {
             "type": "string",
             "description": "A machine-readable error code that was returned."
@@ -1985,10 +3373,29 @@
           "message": {
             "type": "string",
             "description": "A human-readable description of the error that was returned."
+          },
+          "param": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The parameter name that was associated with the error, if any."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "headers": {
+            "additionalProperties": {
+              "type": "string",
+              "description": "The header value that was emitted."
+            },
+            "type": "object",
+            "description": "The response headers that were emitted with the error, if any."
           }
         },
         "type": "object",
-        "required": ["code", "message"],
+        "required": ["type", "code", "message"],
         "title": "Error",
         "description": "An error that occurred while generating the response."
       },
@@ -2044,10 +3451,400 @@
         "title": "Function",
         "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling)."
       },
+      "ApproximateLocation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["approximate"],
+            "description": "The type of location approximation. Always `approximate`.",
+            "default": "approximate"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The two-letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1) of the user, e.g. `US`."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Free text input for the region of the user, e.g. `California`."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Free text input for the city of the user, e.g. `San Francisco`."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The [IANA timezone](https://timeapi.io/documentation/iana-timezones) of the user, e.g. `America/Los_Angeles`."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "country", "region", "city", "timezone"]
+      },
+      "WebSearchTool": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search"],
+            "description": "The type of the web search tool. Always `web_search`.",
+            "default": "web_search"
+          },
+          "user_location": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ApproximateLocation"
+                  },
+                  {
+                    "description": "The user's location."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "user_location", "search_context_size"],
+        "title": "Web search",
+        "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search)."
+      },
+      "WebSearchPreviewTool": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search_preview"],
+            "description": "The type of the web search tool. Always `web_search_preview`.",
+            "default": "web_search_preview"
+          },
+          "user_location": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ApproximateLocation"
+                  },
+                  {
+                    "description": "The user's location."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "search_context_size": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchContextSize"
+              },
+              {
+                "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "user_location", "search_context_size"],
+        "title": "Web search preview",
+        "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search)."
+      },
+      "ImageGenTool": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation"],
+            "description": "The type of the image generation tool. Always `image_generation`.",
+            "default": "image_generation"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageGenToolModel"
+                  },
+                  {
+                    "description": "The image generation model to use. Defaults to `gpt-image-1` when not specified."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "n": {
+            "type": "integer",
+            "description": "The number of images to generate. Must be between 1 and 10."
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageQuality"
+                  },
+                  {
+                    "description": "The quality of the image that will be generated. Must be one of `auto` (default value, will automatically select the quality based on the prompt), `high`, `medium`, or `low`."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "size": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageSize"
+                  },
+                  {
+                    "description": "The size of the generated images. Must be one of `1024x1024`, `1536x1024` (landscape), `1024x1536` (portrait), or `auto` (default value)."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output_format": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageOutputFormat"
+                  },
+                  {
+                    "description": "The format of the generated images. Must be one of `png`, `jpeg`, or `webp`."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "output_compression": {
+            "type": "integer",
+            "description": "The compression level of the generated images. Must be between 0 and 100, and defaults to 100."
+          },
+          "moderation": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageModeration"
+                  },
+                  {
+                    "description": "Control the content-moderation level for images generated. Must be either `low` for less restrictive filtering or `auto` (default value)."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "background": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ImageBackground"
+                  },
+                  {
+                    "description": "Allows to set transparency for the background of the generated image(s). This parameter is only supported for `gpt-image-1`. Must be one of `transparent`, `opaque` or `auto` (default value). When `auto` is used, the model will automatically determine the best background for the image.\nIf `transparent`, the output format needs to support transparency, so it should be set to either `png` (default value) or `webp`."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "model",
+          "n",
+          "quality",
+          "size",
+          "output_format",
+          "output_compression",
+          "moderation",
+          "background"
+        ],
+        "title": "Image generation",
+        "description": "A tool that generates images. Learn more about the [image generation tool](https://platform.openai.com/docs/guides/image-generation)."
+      },
+      "CustomTextFormatField": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["text"],
+            "description": "Unconstrained text format. Always `text`.",
+            "default": "text"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "Text format",
+        "description": "Unconstrained free-form text."
+      },
+      "GrammarSyntax1": {
+        "type": "string",
+        "enum": ["lark", "regex"]
+      },
+      "CustomGrammarFormatField": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["grammar"],
+            "description": "Grammar format. Always `grammar`.",
+            "default": "grammar"
+          },
+          "syntax": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrammarSyntax1"
+              },
+              {
+                "description": "The syntax of the grammar definition. One of `lark` or `regex`."
+              }
+            ]
+          },
+          "definition": {
+            "type": "string",
+            "description": "The grammar definition."
+          }
+        },
+        "type": "object",
+        "required": ["type", "syntax", "definition"],
+        "title": "Grammar format",
+        "description": "A grammar defined by the user."
+      },
+      "CustomToolFormat": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomTextFormatField"
+          },
+          {
+            "$ref": "#/components/schemas/CustomGrammarFormatField"
+          }
+        ],
+        "description": "The input format for the custom tool. Default is unconstrained text.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "CustomTool": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom"],
+            "description": "The type of the custom tool. Always `custom`.",
+            "default": "custom"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool, used to identify it in tool calls."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "Optional description of the custom tool, used to provide more context."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "format": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CustomToolFormat"
+                  },
+                  {
+                    "description": "The input format for the custom tool. Default is unconstrained text."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["type", "name", "description", "format"],
+        "title": "Custom tool",
+        "description": "A custom tool that processes input using a specified format. Learn more about [custom tools](/docs/guides/function-calling#custom-tools)."
+      },
       "Tool": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/FunctionTool"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchTool"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchPreviewTool"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenTool"
+          },
+          {
+            "$ref": "#/components/schemas/CustomTool"
           }
         ],
         "description": "A tool that can be used to generate a response.",
@@ -2069,6 +3866,61 @@
         "type": "object",
         "required": ["type"]
       },
+      "WebSearchToolChoice": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web_search_preview"],
+            "default": "web_search_preview"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "ImageGenToolChoice": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation"],
+            "default": "image_generation"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "CustomToolChoice": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["custom"],
+            "default": "custom"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": ["type"]
+      },
+      "SpecificToolChoice": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FunctionToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/WebSearchToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/CustomToolChoice"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "AllowedToolChoice": {
         "properties": {
           "type": {
@@ -2081,8 +3933,20 @@
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/FunctionToolChoice"
+                },
+                {
+                  "$ref": "#/components/schemas/WebSearchToolChoice"
+                },
+                {
+                  "$ref": "#/components/schemas/ImageGenToolChoice"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomToolChoice"
                 }
-              ]
+              ],
+              "discriminator": {
+                "propertyName": "type"
+              }
             },
             "type": "array"
           },
@@ -2092,6 +3956,19 @@
         },
         "type": "object",
         "required": ["type", "tools", "mode"]
+      },
+      "ToolChoice": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SpecificToolChoice"
+          },
+          {
+            "$ref": "#/components/schemas/ToolChoiceValueEnum"
+          },
+          {
+            "$ref": "#/components/schemas/AllowedToolChoice"
+          }
+        ]
       },
       "TextResponseFormat": {
         "properties": {
@@ -2165,7 +4042,10 @@
               {
                 "$ref": "#/components/schemas/JsonSchemaResponseFormat"
               }
-            ]
+            ],
+            "discriminator": {
+              "propertyName": "type"
+            }
           },
           "verbosity": {
             "$ref": "#/components/schemas/VerbosityEnum"
@@ -2394,17 +4274,7 @@
             "description": "The tools that were available to the model during response generation."
           },
           "tool_choice": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/FunctionToolChoice"
-              },
-              {
-                "$ref": "#/components/schemas/ToolChoiceValueEnum"
-              },
-              {
-                "$ref": "#/components/schemas/AllowedToolChoice"
-              }
-            ]
+            "$ref": "#/components/schemas/ToolChoice"
           },
           "truncation": {
             "allOf": [
@@ -2580,57 +4450,59 @@
         ],
         "title": "The response object",
         "description": "The complete response object that was returned by the Responses API.",
-        "example": {
-          "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
-          "object": "response",
-          "created_at": 1741476777,
-          "status": "completed",
-          "completed_at": 1741476778,
-          "model": "gpt-4o-2024-08-06",
-          "output": [
-            {
-              "type": "message",
-              "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
-              "status": "completed",
-              "role": "assistant",
-              "content": [
-                {
-                  "type": "output_text",
-                  "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
-                  "annotations": []
-                }
-              ]
-            }
-          ],
-          "parallel_tool_calls": true,
-          "reasoning": {},
-          "store": true,
-          "background": false,
-          "temperature": 1,
-          "presence_penalty": 0,
-          "frequency_penalty": 0,
-          "text": {
-            "format": {
-              "type": "text"
-            }
-          },
-          "tool_choice": "auto",
-          "tools": [],
-          "top_p": 1,
-          "truncation": "disabled",
-          "usage": {
-            "input_tokens": 328,
-            "input_tokens_details": {
-              "cached_tokens": 0
+        "examples": [
+          {
+            "id": "resp_67ccd3a9da748190baa7f1570fe91ac604becb25c45c1d41",
+            "object": "response",
+            "created_at": 1741476777,
+            "status": "completed",
+            "completed_at": 1741476778,
+            "model": "gpt-4o-2024-08-06",
+            "output": [
+              {
+                "type": "message",
+                "id": "msg_67ccd3acc8d48190a77525dc6de64b4104becb25c45c1d41",
+                "status": "completed",
+                "role": "assistant",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "The image depicts a scenic landscape with a wooden boardwalk or pathway leading through lush, green grass under a blue sky with some clouds. The setting suggests a peaceful natural area, possibly a park or nature reserve. There are trees and shrubs in the background.",
+                    "annotations": []
+                  }
+                ]
+              }
+            ],
+            "parallel_tool_calls": true,
+            "reasoning": {},
+            "store": true,
+            "background": false,
+            "temperature": 1,
+            "presence_penalty": 0,
+            "frequency_penalty": 0,
+            "text": {
+              "format": {
+                "type": "text"
+              }
             },
-            "output_tokens": 52,
-            "output_tokens_details": {
-              "reasoning_tokens": 0
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 1,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 328,
+              "input_tokens_details": {
+                "cached_tokens": 0
+              },
+              "output_tokens": 52,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 380
             },
-            "total_tokens": 380
-          },
-          "metadata": {}
-        }
+            "metadata": {}
+          }
+        ]
       },
       "ResponseCreatedStreamingEvent": {
         "properties": {
@@ -3645,6 +5517,592 @@
         "title": "Response function call arguments done event",
         "description": "A streaming event that indicated function call arguments were completed."
       },
+      "ResponseCustomToolCallInputDeltaStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.custom_tool_call_input.delta"],
+            "description": "The type of the event, always `response.custom_tool_call.input.delta`.",
+            "default": "response.custom_tool_call_input.delta"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          },
+          "delta": {
+            "type": "string",
+            "description": "The input delta that was appended."
+          },
+          "obfuscation": {
+            "type": "string",
+            "description": "An obfuscation string that was added to pad the event payload."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "item_id",
+          "delta"
+        ],
+        "title": "Response custom tool call input delta event",
+        "description": "A streaming event that indicated custom tool call input was incrementally added."
+      },
+      "ResponseCustomToolCallInputDoneStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.custom_tool_call_input.done"],
+            "description": "The type of the event, always `response.custom_tool_call.input.done`.",
+            "default": "response.custom_tool_call_input.done"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          },
+          "input": {
+            "type": "string",
+            "description": "The final input string that was emitted."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "item_id",
+          "input"
+        ],
+        "title": "Response custom tool call input done event",
+        "description": "A streaming event that indicated custom tool call input was completed."
+      },
+      "ResponseWebSearchCallInProgressStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.web_search_call.in_progress"],
+            "description": "The type of the event, always `response.web_search_call.in_progress`.",
+            "default": "response.web_search_call.in_progress"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response web search call in progress event",
+        "description": "A streaming event that indicated a web search tool call was in progress."
+      },
+      "ResponseWebSearchCallSearchingStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.web_search_call.searching"],
+            "description": "The type of the event, always `response.web_search_call.searching`.",
+            "default": "response.web_search_call.searching"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response web search call searching event",
+        "description": "A streaming event that indicated a web search tool call was searching."
+      },
+      "ResponseWebSearchCallCompletedStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.web_search_call.completed"],
+            "description": "The type of the event, always `response.web_search_call.completed`.",
+            "default": "response.web_search_call.completed"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response web search call completed event",
+        "description": "A streaming event that indicated a web search tool call was completed."
+      },
+      "ResponseImageGenCallInProgressStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.image_generation_call.in_progress"],
+            "description": "The type of the event, always `response.image_generation_call.in_progress`.",
+            "default": "response.image_generation_call.in_progress"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response image generation call in progress event",
+        "description": "A streaming event that indicated an image generation tool call was in progress."
+      },
+      "ResponseImageGenCallGeneratingStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.image_generation_call.generating"],
+            "description": "The type of the event, always `response.image_generation_call.generating`.",
+            "default": "response.image_generation_call.generating"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response image generation call generating event",
+        "description": "A streaming event that indicated an image generation tool call was generating."
+      },
+      "ResponseImageGenCallPartialImageStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.image_generation_call.partial_image"],
+            "description": "The type of the event, always `response.image_generation_call.partial_image`.",
+            "default": "response.image_generation_call.partial_image"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          },
+          "partial_image_index": {
+            "type": "integer",
+            "description": "The index of the partial image that was emitted."
+          },
+          "partial_image_b64": {
+            "type": "string",
+            "description": "The base64-encoded partial image that was emitted."
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "output_index",
+          "item_id",
+          "partial_image_index",
+          "partial_image_b64"
+        ],
+        "title": "Response image generation call partial image event",
+        "description": "A streaming event that indicated a partial image was emitted for an image generation call."
+      },
+      "ResponseImageGenCallCompletedStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["response.image_generation_call.completed"],
+            "description": "The type of the event, always `response.image_generation_call.completed`.",
+            "default": "response.image_generation_call.completed"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "output_index": {
+            "type": "integer",
+            "description": "The index of the output item that was updated."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The ID of the tool call item that was updated."
+          }
+        },
+        "type": "object",
+        "required": ["type", "sequence_number", "output_index", "item_id"],
+        "title": "Response image generation call completed event",
+        "description": "A streaming event that indicated an image generation tool call was completed."
+      },
+      "ImageGenerationPartialImageStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation.partial_image"],
+            "description": "The type of the event, always `image_gen.partial_image`.",
+            "default": "image_generation.partial_image"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "partial_image_index": {
+            "type": "integer",
+            "description": "The index of the partial image that was emitted."
+          },
+          "b64_json": {
+            "type": "string",
+            "description": "The base64-encoded partial image that was emitted."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The timestamp when the partial image was created."
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "partial_image_index",
+          "b64_json",
+          "created_at"
+        ],
+        "title": "Image generation partial image event",
+        "description": "A streaming event that indicated a partial image was emitted during image generation."
+      },
+      "ImageUsageInputTokensDetails": {
+        "properties": {
+          "text_tokens": {
+            "type": "integer",
+            "description": "The number of text input tokens that was recorded."
+          },
+          "image_tokens": {
+            "type": "integer",
+            "description": "The number of image input tokens that was recorded."
+          }
+        },
+        "type": "object",
+        "required": ["text_tokens", "image_tokens"],
+        "title": "Image usage input tokens details",
+        "description": "A breakdown of input tokens that was recorded for an image request."
+      },
+      "ImageUsageOutputTokensDetails": {
+        "properties": {
+          "image_tokens": {
+            "type": "integer",
+            "description": "The number of image output tokens that was recorded."
+          },
+          "text_tokens": {
+            "type": "integer",
+            "description": "The number of text output tokens that was recorded."
+          }
+        },
+        "type": "object",
+        "required": ["image_tokens", "text_tokens"],
+        "title": "Image usage output tokens details",
+        "description": "A breakdown of output tokens that was recorded for an image request."
+      },
+      "ImageUsage": {
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "description": "The number of input tokens that was recorded."
+          },
+          "output_tokens": {
+            "type": "integer",
+            "description": "The number of output tokens that was recorded."
+          },
+          "total_tokens": {
+            "type": "integer",
+            "description": "The total number of tokens that was recorded."
+          },
+          "input_tokens_details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageUsageInputTokensDetails"
+              },
+              {
+                "description": "A breakdown of input token usage that was recorded."
+              }
+            ]
+          },
+          "output_tokens_details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageUsageOutputTokensDetails"
+              },
+              {
+                "description": "A breakdown of output token usage that was recorded."
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "output_tokens",
+          "total_tokens",
+          "input_tokens_details"
+        ],
+        "title": "Image usage",
+        "description": "Token usage statistics that were recorded for an image request."
+      },
+      "ImageGenerationCompletedStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_generation.completed"],
+            "description": "The type of the event, always `image_gen.completed`.",
+            "default": "image_generation.completed"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "b64_json": {
+            "type": "string",
+            "description": "The base64-encoded image that was emitted."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The timestamp when the image was created."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageUsage"
+              },
+              {
+                "description": "Token usage statistics that were recorded for the image request."
+              }
+            ]
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "b64_json",
+          "created_at",
+          "usage"
+        ],
+        "title": "Image generation completed event",
+        "description": "A streaming event that indicated image generation was completed."
+      },
+      "ImageEditPartialImageStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_edit.partial_image"],
+            "description": "The type of the event, always `image_edit.partial_image`.",
+            "default": "image_edit.partial_image"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "partial_image_index": {
+            "type": "integer",
+            "description": "The index of the partial image that was emitted."
+          },
+          "b64_json": {
+            "type": "string",
+            "description": "The base64-encoded partial image that was emitted."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The timestamp when the partial image was created."
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "partial_image_index",
+          "b64_json",
+          "created_at"
+        ],
+        "title": "Image edit partial image event",
+        "description": "A streaming event that indicated a partial image was emitted during image editing."
+      },
+      "ImageEditCompletedStreamingEvent": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image_edit.completed"],
+            "description": "The type of the event, always `image_edit.completed`.",
+            "default": "image_edit.completed"
+          },
+          "sequence_number": {
+            "type": "integer",
+            "description": "The sequence number of the event that was emitted."
+          },
+          "b64_json": {
+            "type": "string",
+            "description": "The base64-encoded image that was emitted."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The timestamp when the image was created."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImageUsage"
+              },
+              {
+                "description": "Token usage statistics that were recorded for the image request."
+              }
+            ]
+          },
+          "size": {
+            "type": "string",
+            "description": "The image size that was used."
+          },
+          "quality": {
+            "type": "string",
+            "description": "The image quality that was used."
+          },
+          "background": {
+            "type": "string",
+            "description": "The background setting that was used."
+          },
+          "output_format": {
+            "type": "string",
+            "description": "The output format that was used."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "sequence_number",
+          "b64_json",
+          "created_at",
+          "usage"
+        ],
+        "title": "Image edit completed event",
+        "description": "A streaming event that indicated image editing was completed."
+      },
       "ErrorPayload": {
         "properties": {
           "type": {
@@ -3719,21 +6177,123 @@
         "title": "Error event",
         "description": "A streaming event that indicated an error was emitted."
       },
-      "InputVideoContent": {
-        "type": "object",
-        "description": "A content block representing a video input to the model.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": ["input_video"],
-            "description": "The type of the input content. Always `input_video`."
+      "ResponseStreamingEvent": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ResponseCreatedStreamingEvent"
           },
-          "video_url": {
-            "type": "string",
-            "description": "A base64 or remote url that resolves to a video file."
+          {
+            "$ref": "#/components/schemas/ResponseQueuedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseInProgressStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseCompletedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseFailedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseIncompleteStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseOutputItemAddedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseOutputItemDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningSummaryPartAddedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningSummaryPartDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseContentPartAddedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseContentPartDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseOutputTextDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseOutputTextDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseRefusalDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseRefusalDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningSummaryDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseReasoningSummaryDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseOutputTextAnnotationAddedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseFunctionCallArgumentsDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseFunctionCallArgumentsDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseCustomToolCallInputDeltaStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseCustomToolCallInputDoneStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseWebSearchCallInProgressStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseWebSearchCallSearchingStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseWebSearchCallCompletedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseImageGenCallInProgressStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseImageGenCallGeneratingStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseImageGenCallPartialImageStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseImageGenCallCompletedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenerationPartialImageStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ImageGenerationCompletedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ImageEditPartialImageStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ImageEditCompletedStreamingEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ErrorStreamingEvent"
           }
-        },
-        "required": ["type", "video_url"]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       },
       "JsonSchemaResponseFormatParam": {
         "type": "object",
@@ -3745,16 +6305,16 @@
           },
           "description": {
             "type": "string",
-            "description": "A description of what the response format is for, used by the model to\ndetermine how to respond in the format.\n"
+            "description": "A description of what the response format is for, used by the model to determine how to respond in the format. "
           },
           "name": {
             "type": "string",
-            "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\nunderscores and dashes, with a maximum length of 64.\n"
+            "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. "
           },
           "schema": {
             "type": "object",
             "title": "JSON schema",
-            "description": "The schema for the response format, described as a JSON Schema object.\n",
+            "description": "The schema for the response format, described as a JSON Schema object. ",
             "additionalProperties": true
           },
           "strict": {
@@ -3762,7 +6322,7 @@
               {
                 "type": "boolean",
                 "default": false,
-                "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined\nin the `schema` field. Only a subset of JSON Schema is supported when\n`strict` is `true`.\n"
+                "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. "
               },
               {
                 "type": "null"
@@ -3779,7 +6339,10 @@
           {
             "$ref": "#/components/schemas/JsonSchemaResponseFormatParam"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       }
     }
   },
@@ -3815,83 +6378,7 @@
               },
               "text/event-stream": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ResponseCreatedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseQueuedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseInProgressStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseCompletedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseFailedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseIncompleteStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseOutputItemAddedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseOutputItemDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningSummaryPartAddedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningSummaryPartDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseContentPartAddedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseContentPartDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseOutputTextDeltaStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseOutputTextDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseRefusalDeltaStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseRefusalDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningDeltaStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningSummaryDeltaStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseReasoningSummaryDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseOutputTextAnnotationAddedStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseFunctionCallArgumentsDeltaStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ResponseFunctionCallArgumentsDoneStreamingEvent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ErrorStreamingEvent"
-                    }
-                  ],
-                  "discriminator": {
-                    "propertyName": "type"
-                  }
+                  "$ref": "#/components/schemas/ResponseStreamingEvent"
                 }
               }
             }

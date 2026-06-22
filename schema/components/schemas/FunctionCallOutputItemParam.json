@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of the function tool call output. Populated when this item is returned via API.",
-          "example": "fc_123"
+          "examples": ["fc_123"]
         },
         {
           "type": "null"
@@ -34,21 +34,7 @@
         },
         {
           "items": {
-            "oneOf": [
-              {
-                "$ref": "./InputTextContentParam.json"
-              },
-              {
-                "$ref": "./InputImageContentParamAutoParam.json"
-              },
-              {
-                "$ref": "./InputFileContentParam.json"
-              }
-            ],
-            "description": "A piece of message content, such as text, an image, or a file.",
-            "discriminator": {
-              "propertyName": "type"
-            }
+            "$ref": "./InputContentParam.json"
           },
           "type": "array",
           "description": "An array of content outputs (text, image, file) for the function tool call."

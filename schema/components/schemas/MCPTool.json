@@ -31,7 +31,10 @@
     },
     "headers": {
       "anyOf": [
-        {},
+        {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
         {
           "type": "null"
         }

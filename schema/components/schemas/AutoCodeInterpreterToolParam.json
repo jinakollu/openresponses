@@ -10,7 +10,7 @@
     "file_ids": {
       "items": {
         "type": "string",
-        "example": "file-123"
+        "examples": ["file-123"]
       },
       "type": "array",
       "maxItems": 50,

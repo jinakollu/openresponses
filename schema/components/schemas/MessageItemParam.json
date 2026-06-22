@@ -1,0 +1,19 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./AssistantMessageItemParam.json"
+    },
+    {
+      "$ref": "./DeveloperMessageItemParam.json"
+    },
+    {
+      "$ref": "./SystemMessageItemParam.json"
+    },
+    {
+      "$ref": "./UserMessageItemParam.json"
+    }
+  ],
+  "discriminator": {
+    "propertyName": "role"
+  }
+}

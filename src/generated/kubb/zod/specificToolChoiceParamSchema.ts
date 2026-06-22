@@ -3,9 +3,17 @@
  * Do not edit manually.
  */
 
+import { specificCustomToolParamSchema } from "./specificCustomToolParamSchema.ts";
 import { specificFunctionParamSchema } from "./specificFunctionParamSchema.ts";
+import { specificImageGenParamSchema } from "./specificImageGenParamSchema.ts";
+import { specificWebSearchParamSchema } from "./specificWebSearchParamSchema.ts";
+import { specificWebSearchPreviewParamSchema } from "./specificWebSearchPreviewParamSchema.ts";
 import { z } from "zod";
 
-export const specificToolChoiceParamSchema = z.lazy(
-  () => specificFunctionParamSchema,
-);
+export const specificToolChoiceParamSchema = z.union([
+  z.lazy(() => specificWebSearchParamSchema),
+  z.lazy(() => specificWebSearchPreviewParamSchema),
+  z.lazy(() => specificImageGenParamSchema),
+  z.lazy(() => specificFunctionParamSchema),
+  z.lazy(() => specificCustomToolParamSchema),
+]);

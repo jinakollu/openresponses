@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of this local shell tool call.",
-          "example": "lsh_123"
+          "examples": ["lsh_123"]
         },
         {
           "type": "null"

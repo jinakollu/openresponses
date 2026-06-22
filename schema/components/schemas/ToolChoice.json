@@ -1,0 +1,13 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./SpecificToolChoice.json"
+    },
+    {
+      "$ref": "./ToolChoiceValueEnum.json"
+    },
+    {
+      "$ref": "./AllowedToolChoice.json"
+    }
+  ]
+}

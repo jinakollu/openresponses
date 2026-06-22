@@ -3,12 +3,22 @@
  * Do not edit manually.
  */
 
+import { customToolChoiceSchema } from "./customToolChoiceSchema.ts";
 import { functionToolChoiceSchema } from "./functionToolChoiceSchema.ts";
+import { imageGenToolChoiceSchema } from "./imageGenToolChoiceSchema.ts";
 import { toolChoiceValueEnumSchema } from "./toolChoiceValueEnumSchema.ts";
+import { webSearchToolChoiceSchema } from "./webSearchToolChoiceSchema.ts";
 import { z } from "zod";
 
 export const allowedToolChoiceSchema = z.object({
   type: z.enum(["allowed_tools"]).default("allowed_tools"),
-  tools: z.array(z.lazy(() => functionToolChoiceSchema)),
+  tools: z.array(
+    z.union([
+      z.lazy(() => functionToolChoiceSchema),
+      z.lazy(() => webSearchToolChoiceSchema),
+      z.lazy(() => imageGenToolChoiceSchema),
+      z.lazy(() => customToolChoiceSchema),
+    ]),
+  ),
   mode: z.lazy(() => toolChoiceValueEnumSchema),
 });

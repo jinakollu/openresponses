@@ -5,7 +5,7 @@
         {
           "type": "string",
           "description": "The unique ID of the approval request.",
-          "example": "mcpr_123"
+          "examples": ["mcpr_123"]
         },
         {
           "type": "null"

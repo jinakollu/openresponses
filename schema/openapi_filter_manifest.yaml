@@ -21,7 +21,7 @@ allow:
       - file_data
       - file_url
   oneOf:
-    "paths.POST /responses.responses.200.content.text/event-stream.schema":
+    ResponseStreamingEvent:
       - ResponseCreatedStreamingEvent
       - ResponseQueuedStreamingEvent
       - ResponseInProgressStreamingEvent
@@ -45,33 +45,69 @@ allow:
       - ResponseOutputTextAnnotationAddedStreamingEvent
       - ResponseFunctionCallArgumentsDeltaStreamingEvent
       - ResponseFunctionCallArgumentsDoneStreamingEvent
+      - ResponseCustomToolCallInputDeltaStreamingEvent
+      - ResponseCustomToolCallInputDoneStreamingEvent
+      - ResponseWebSearchCallInProgressStreamingEvent
+      - ResponseWebSearchCallSearchingStreamingEvent
+      - ResponseWebSearchCallCompletedStreamingEvent
+      - ResponseImageGenCallInProgressStreamingEvent
+      - ResponseImageGenCallGeneratingStreamingEvent
+      - ResponseImageGenCallPartialImageStreamingEvent
+      - ResponseImageGenCallCompletedStreamingEvent
+      - ImageGenerationPartialImageStreamingEvent
+      - ImageGenerationCompletedStreamingEvent
+      - ImageEditPartialImageStreamingEvent
+      - ImageEditCompletedStreamingEvent
       - ErrorStreamingEvent
     AllowedToolChoice:
       - FunctionToolChoice
+      - WebSearchToolChoice
+      - ImageGenToolChoice
+      - CustomToolChoice
     ResponsesToolParam:
       - FunctionToolParam
+      - WebSearchToolParam
+      - WebSearchToolParam_2025_08_26Param
+      - WebSearchPreviewToolParam
+      - WebSearchPreviewToolParam_2025_03_11Param
+      - ImageGenToolParam
+      - CustomToolParam
     ItemField:
       - Message
       - FunctionCall
       - FunctionCallOutput
       - ReasoningBody
+      - WebSearchCall
+      - ImageGenCall
+      - CustomToolCall
+      - CustomToolCallOutput
     ItemParam:
       - ItemReferenceParam
       - ReasoningItemParam
-      - UserMessageItemParam
-      - SystemMessageItemParam
-      - DeveloperMessageItemParam
-      - AssistantMessageItemParam
+      - MessageItemParam
       - FunctionCallItemParam
       - FunctionCallOutputItemParam
+      - WebSearchCallItemParam
+      - ImageGenCallItemParam
+      - CustomToolCallItemParam
+      - CustomToolCallOutputItemParam
     Tool:
       - FunctionTool
+      - WebSearchTool
+      - WebSearchPreviewTool
+      - ImageGenTool
+      - CustomTool
     SpecificToolChoiceParam:
       - SpecificFunctionParam
-    ResponseResource.tool_choice:
+      - SpecificWebSearchParam
+      - SpecificWebSearchPreviewParam
+      - SpecificImageGenParam
+      - SpecificCustomToolParam
+    SpecificToolChoice:
       - FunctionToolChoice
-      - ToolChoiceValueEnum
-      - AllowedToolChoice
+      - WebSearchToolChoice
+      - ImageGenToolChoice
+      - CustomToolChoice
     OutputTextContentParam.annotations:
       - UrlCitationParam
     Annotation:
@@ -80,17 +116,12 @@ allow:
     IncludeEnum:
       - reasoning.encrypted_content
       - message.output_text.logprobs
+      - web_search_call.action.sources
     MessageRole:
       - user
       - assistant
       - system
       - developer
-    ReasoningEffortEnum:
-      - none
-      - low
-      - medium
-      - high
-      - xhigh
 
 deny:
   types:
@@ -102,6 +133,16 @@ deny:
     FunctionCall:
       - created_by
     FunctionCallOutput:
+      - created_by
+    WebSearchCall:
+      - created_by
+    ImageGenCall:
+      - created_by
+    ImageGenCallItemParam:
+      - created_by
+    CustomToolCall:
+      - created_by
+    CustomToolCallOutput:
       - created_by
 
     CreateResponseBody:
@@ -136,5 +177,3 @@ deny:
       - FileSearchTool
     ItemField:
       - FileSearchCall
-      - WebSearchCall
-      - ImageGenCall

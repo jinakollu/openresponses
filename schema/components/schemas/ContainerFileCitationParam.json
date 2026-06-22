@@ -20,12 +20,12 @@
     "container_id": {
       "type": "string",
       "description": "The ID of the container.",
-      "example": "cntr_123"
+      "examples": ["cntr_123"]
     },
     "file_id": {
       "type": "string",
       "description": "The ID of the container file.",
-      "example": "cfile_123"
+      "examples": ["cfile_123"]
     },
     "filename": {
       "type": "string",

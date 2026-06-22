@@ -13,9 +13,11 @@
   "type": "object",
   "required": ["object", "input_tokens"],
   "title": "Token counts",
-  "example": {
-    "object": "response.input_tokens",
-    "input_tokens": 123
-  },
+  "examples": [
+    {
+      "object": "response.input_tokens",
+      "input_tokens": 123
+    }
+  ],
   "x-openai-class-name": "responsesapi.api.resources.token_counts_resource.TokenCountsBody"
 }

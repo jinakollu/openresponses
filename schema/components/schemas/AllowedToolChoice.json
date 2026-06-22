@@ -42,7 +42,10 @@
           {
             "$ref": "./CustomToolChoice.json"
           }
-        ]
+        ],
+        "discriminator": {
+          "propertyName": "type"
+        }
       },
       "type": "array"
     },

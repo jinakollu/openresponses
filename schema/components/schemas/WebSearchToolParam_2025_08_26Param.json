@@ -18,9 +18,13 @@
     "external_web_access": {
       "type": "boolean",
       "description": "Allow live internet access for web search. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content."
+    },
+    "filters": {
+      "$ref": "./SearchFiltersParam.json",
+      "description": "Filters for the search."
     }
   },
   "type": "object",
   "required": ["type"],
-  "x-openai-class-name": "responses_common.api.params.tool_param.WebSearchToolParam_2025_08_14"
+  "x-openai-class-name": "responses_common.api.params.tool_param.WebSearchToolParam_2025_08_26"
 }

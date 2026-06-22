@@ -3,23 +3,25 @@
  * Do not edit manually.
  */
 
-import { assistantMessageItemParamSchema } from "./assistantMessageItemParamSchema.ts";
-import { developerMessageItemParamSchema } from "./developerMessageItemParamSchema.ts";
+import { customToolCallItemParamSchema } from "./customToolCallItemParamSchema.ts";
+import { customToolCallOutputItemParamSchema } from "./customToolCallOutputItemParamSchema.ts";
 import { functionCallItemParamSchema } from "./functionCallItemParamSchema.ts";
 import { functionCallOutputItemParamSchema } from "./functionCallOutputItemParamSchema.ts";
+import { imageGenCallItemParamSchema } from "./imageGenCallItemParamSchema.ts";
 import { itemReferenceParamSchema } from "./itemReferenceParamSchema.ts";
+import { messageItemParamSchema } from "./messageItemParamSchema.ts";
 import { reasoningItemParamSchema } from "./reasoningItemParamSchema.ts";
-import { systemMessageItemParamSchema } from "./systemMessageItemParamSchema.ts";
-import { userMessageItemParamSchema } from "./userMessageItemParamSchema.ts";
+import { webSearchCallItemParamSchema } from "./webSearchCallItemParamSchema.ts";
 import { z } from "zod";
 
 export const itemParamSchema = z.union([
   z.lazy(() => itemReferenceParamSchema),
   z.lazy(() => reasoningItemParamSchema),
-  z.lazy(() => userMessageItemParamSchema),
-  z.lazy(() => systemMessageItemParamSchema),
-  z.lazy(() => developerMessageItemParamSchema),
-  z.lazy(() => assistantMessageItemParamSchema),
+  z.lazy(() => messageItemParamSchema),
   z.lazy(() => functionCallItemParamSchema),
   z.lazy(() => functionCallOutputItemParamSchema),
+  z.lazy(() => customToolCallItemParamSchema),
+  z.lazy(() => customToolCallOutputItemParamSchema),
+  z.lazy(() => webSearchCallItemParamSchema),
+  z.lazy(() => imageGenCallItemParamSchema),
 ]);
